@@ -1,8 +1,10 @@
 package sudoku;
 
+// Important: Potential violation of the dependency inversion principle? Discuss later
+
 public class Board
 {
-	private int grid[][];
+	int[][] grid;
 	
 	public Board()
 	{
@@ -25,10 +27,5 @@ public class Board
 	public void setCell(int x, int y, int val)
 	{
 		grid[x][y] = val;
-	}
-	
-	public void generateBoard()
-	{
-		// kyle: add your code here
 	}
 }
