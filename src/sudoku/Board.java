@@ -9,23 +9,25 @@ public class Board
 	public Board()
 	{
 		grid = new int[9][9];
-		
-		for (int x = 0; x < 9; x++)
-		{
-			for (int y = 0; y < 9; y++)
-			{
-				grid[x][y] = 0;
-			}
-		}
 	}
 	
-	public int getCell(int x, int y)
+	public Board(int[][] new_grid)
 	{
-		return grid[x][y];
+		grid = new_grid;
 	}
 	
-	public void setCell(int x, int y, int val)
+	public int getCell(int row, int col)
 	{
-		grid[x][y] = val;
+		return grid[row][col];
+	}
+	
+	public void setCell(int row, int col, int val)
+	{
+		grid[row][col] = val;
+	}
+	
+	public void getGrid()
+	{
+		return grid;
 	}
 }
