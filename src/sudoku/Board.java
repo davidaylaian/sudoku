@@ -26,7 +26,7 @@ public class Board
 		grid[row][col] = val;
 	}
 	
-	public void getGrid()
+	public int[][] getGrid()
 	{
 		return grid;
 	}
