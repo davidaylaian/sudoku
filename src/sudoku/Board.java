@@ -1,7 +1,5 @@
 package sudoku;
 
-// Important: Potential violation of the dependency inversion principle? Discuss later
-
 public class Board
 {
 	int[][] grid;

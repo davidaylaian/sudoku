@@ -5,13 +5,13 @@ import java.io.IOException;
 
 public class GameState
 {
-	private InternalBoard solution;
+	private Board solution;
 	private Board gameboard;
 	private boolean[][] emphasis;
 	
 	public GameState()
 	{
-		solution = new InternalBoard();
+		solution = new Board();
 		gameboard = new Board();
 		emphasis = new boolean[9][9];
 	}
@@ -26,13 +26,13 @@ public class GameState
 		emphasis = new_emphasis;
 	}
 	
-	public void setBoards(InternalBoard new_solution, Board new_gameboard)
+	public void setBoards(Board new_solution, Board new_gameboard)
 	{
 		solution = new_solution;
 		gameboard = new_gameboard;
 	}
 	
-	public InternalBoard getSolution()
+	public Board getSolution()
 	{
 		return solution;
 	}
