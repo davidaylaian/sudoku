@@ -2,13 +2,15 @@ package sudoku;
 
 public class Puzzle
 {
-	public void solveBoard(Board b)
+	public static int[][] generatePuzzle()
 	{
 		// stub
+		return null;
 	}
 	
-	public void generateBoard(Board b)
+	public static int[][] solvePuzzle(int[][] board)
 	{
 		// stub
+		return board;
 	}
 }
