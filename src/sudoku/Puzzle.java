@@ -5,6 +5,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Puzzle {
+	
+	// returns a copy of the given array
+	public static int[][] copyArray(int[][] array) {
+		int[][] copy = new int[array.length][];
+		for(int i=0;i<array.length;i++) {
+			copy[i] = array[i].clone();
+		}
+		return copy;
+	}
+	
+	// returns whether the number can be placed in the given position
 	public static boolean safePlace(int[][] board, int row, int col, int num) {
 		for(int c=0;c<9;c++) {
 			if(board[row][c] == num)
@@ -24,7 +35,42 @@ public class Puzzle {
 		}
 		return true;
 	}
-	public static boolean solveBoard(int[][] board) {		
+	
+	// returns null if there is no solution
+	// returns solved puzzle otherwise
+	public static int[][] solvePuzzle(int[][] board) {
+		if(solveBoard(board)) {
+			return board;
+		}
+		return null;
+	}
+	
+	// returns a random puzzle with a unique solution
+	public static int[][] createPuzzle() {
+		ArrayList<Point> pos = new ArrayList<Point>();
+		for(int r=0;r<9;r++) {
+			for(int c=0;c<9;c++) {
+				pos.add(new Point(r,c));
+			}
+		}
+		Collections.shuffle(pos);
+		int[][] board = new int[9][9];
+		solveBoard(board);
+		for(Point p : pos) {
+			int row = (int) p.getX();
+			int col = (int) p.getY();
+
+			int[][] copy = copyArray(board);
+			copy[row][col] = 0;
+			int[] count = new int[1];
+			allSolutions(copy, count);
+			if(count[0]==1) {
+				board[row][col] = 0;
+			}
+		}
+		return board;
+	}
+	private static boolean solveBoard(int[][] board) {		
 		boolean full = true;
 		int row = 0;
 		int col = 0;
@@ -88,36 +134,5 @@ public class Puzzle {
 			}
 		}
 		return false;
-	}
-	public static int[][] createPuzzle() {
-		ArrayList<Point> pos = new ArrayList<Point>();
-		for(int r=0;r<9;r++) {
-			for(int c=0;c<9;c++) {
-				pos.add(new Point(r,c));
-			}
-		}
-		Collections.shuffle(pos);
-		int[][] board = new int[9][9];
-		solveBoard(board);
-		for(Point p : pos) {
-			int row = (int) p.getX();
-			int col = (int) p.getY();
-
-			int[][] copy = copyArray(board);
-			copy[row][col] = 0;
-			int[] count = new int[1];
-			allSolutions(copy, count);
-			if(count[0]==1) {
-				board[row][col] = 0;
-			}
-		}
-		return board;
-	}
-	private static int[][] copyArray(int[][] array) {
-		int[][] copy = new int[array.length][];
-		for(int i=0;i<array.length;i++) {
-			copy[i] = array[i].clone();
-		}
-		return copy;
 	}
 }
