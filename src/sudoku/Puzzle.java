@@ -1,3 +1,5 @@
+package sudoku;
+
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -119,7 +121,3 @@ public class Puzzle {
 		return copy;
 	}
 }
-
-
-
-
