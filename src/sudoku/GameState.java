@@ -9,7 +9,6 @@ public class GameState
 {
 	private int[][] solution;
 	private Cell[][] gameBoard;
-	private ArrayList<Change> history;
 	
 	public GameState(int[][] newSolution)
 	{
@@ -29,16 +28,6 @@ public class GameState
 	public int[][] getSolution()
 	{
 		return solution;
-	}
-	
-	public void undo()
-	{
-		// stub
-	}
-	
-	public void redo()
-	{
-		// stub
 	}
 	
 	public void save(File f) throws IOException
