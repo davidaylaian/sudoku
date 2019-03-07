@@ -1,15 +1,18 @@
 package sudoku;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 
 public class GameState
 {
 	private int[][] solution;
 	private Cell[][] gameBoard;
 	private ArrayList<Change> history;
+	
+	
 	
 	public GameState(int[][] newSolution)
 	{
@@ -41,13 +44,39 @@ public class GameState
 		// stub
 	}
 	
-	public void save(File f) throws IOException
+	public void save(File f)
 	{
-		// stub
+		try {
+			FileOutputStream FOS = new FileOutputStream(f);
+			XMLEncoder E = new XMLEncoder(FOS);
+			E.writeObject(this);
+			E.close();
+			FOS.close();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 	}
 	
-	public void load(File f) throws IOException
+	public static GameState load(File f)
 	{
-		// stub
+		GameState g = null;
+		
+		try {
+			FileInputStream FIS = new FileInputStream(f);
+			XMLDecoder D = new XMLDecoder(FIS);
+			g = (GameState) D.readObject();
+			D.close();
+			FIS.close();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		
+		return g;
+	}
+	
+	public static void main(String[] args) {
+		int[][] a = {{1},{2}};
+		GameState g = new GameState(a);
+		g.save();
 	}
 }
