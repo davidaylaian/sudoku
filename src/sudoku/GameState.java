@@ -10,9 +10,6 @@ public class GameState
 {
 	private int[][] solution;
 	private Cell[][] gameBoard;
-	private ArrayList<Change> history;
-	
-	
 	
 	public GameState(int[][] newSolution)
 	{
@@ -34,17 +31,7 @@ public class GameState
 		return solution;
 	}
 	
-	public void undo()
-	{
-		// stub
-	}
-	
-	public void redo()
-	{
-		// stub
-	}
-	
-	public void save(File f)
+	public void save(File f) throws IOException
 	{
 		try {
 			FileOutputStream FOS = new FileOutputStream(f);
@@ -72,11 +59,5 @@ public class GameState
 		}
 		
 		return g;
-	}
-	
-	public static void main(String[] args) {
-		int[][] a = {{1},{2}};
-		GameState g = new GameState(a);
-		g.save();
 	}
 }
