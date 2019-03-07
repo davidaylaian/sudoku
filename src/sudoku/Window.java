@@ -3,8 +3,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-public class Window
-{
+public class Window{
 	JFrame frame;
 	JPanel contentPane;
 	public Window()
