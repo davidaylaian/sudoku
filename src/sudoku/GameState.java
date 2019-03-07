@@ -1,8 +1,6 @@
 package sudoku;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 
@@ -33,31 +31,22 @@ public class GameState
 	
 	public void save(File f) throws IOException
 	{
-		try {
-			FileOutputStream FOS = new FileOutputStream(f);
-			XMLEncoder E = new XMLEncoder(FOS);
-			E.writeObject(this);
-			E.close();
-			FOS.close();
-		} catch (IOException e){
-			e.printStackTrace();
-		}
+		FileOutputStream FOS = new FileOutputStream(f);
+		XMLEncoder E = new XMLEncoder(FOS);
+		
+		E.writeObject(this);
+		E.close();
+		FOS.close();
 	}
 	
-	public static GameState load(File f)
+	public static GameState load(File f) throws IOException
 	{
-		GameState g = null;
+		FileInputStream FIS = new FileInputStream(f);
+		XMLDecoder D = new XMLDecoder(FIS);
+		GameState g = (GameState) D.readObject();
 		
-		try {
-			FileInputStream FIS = new FileInputStream(f);
-			XMLDecoder D = new XMLDecoder(FIS);
-			g = (GameState) D.readObject();
-			D.close();
-			FIS.close();
-		} catch (IOException e){
-			e.printStackTrace();
-		}
-		
+		D.close();
+		FIS.close();
 		return g;
 	}
 }
