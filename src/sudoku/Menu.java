@@ -24,7 +24,7 @@ public class Menu extends JPanel implements ActionListener{
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(10, 10, 10, 10);
-		
+
 		fileName = new JLabel();
 		hint = new JButton("Hint");
 		hint.setActionCommand("hint");
@@ -32,21 +32,21 @@ public class Menu extends JPanel implements ActionListener{
 		c.gridx = 1;
 		c.gridy = 0;
 		this.add(hint, c);
-		
+
 		undo = new JButton("Undo");
 		undo.setActionCommand("undo");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 0;
 		this.add(undo, c);
-		
+
 		redo = new JButton("Redo");
 		redo.setActionCommand("redo");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 3;
 		c.gridy = 0;
 		this.add(redo, c);
-		
+
 		c.insets = new Insets(0, 0, 0, 0);
 		a = new JRadioButton();
 		a.setActionCommand("entry");
@@ -54,13 +54,13 @@ public class Menu extends JPanel implements ActionListener{
 		c.gridx = 4;
 		c.gridy = 0;
 		this.add(a, c);
-		
+
 		entry = new JLabel("Entry");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 5;
 		c.gridy = 0;
 		this.add(entry, c);
-		
+
 		c.insets = new Insets(10, 10, 10, 10);
 		gen = new JButton("Generate");
 		gen.setActionCommand("gen");
@@ -68,27 +68,27 @@ public class Menu extends JPanel implements ActionListener{
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(gen, c);
-		
+
 		solve = new JButton("Solve");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 1;
 		this.add(solve, c);
-		
+
 		save = new JButton("Save");
 		save.setActionCommand("sa");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 1;
 		this.add(save, c);
-		
+
 		open = new JButton("Open");
 		open.setActionCommand("open");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 3;
 		c.gridy = 1;
 		this.add(open, c);
-		
+
 		c.insets = new Insets(0, 0, 0, 0);
 		b = new JRadioButton();
 		b.setActionCommand("solving");
@@ -96,7 +96,7 @@ public class Menu extends JPanel implements ActionListener{
 		c.gridx = 4;
 		c.gridy = 1;
 		this.add(b, c);
-		
+
 		solving = new JLabel("Solving");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 5;
@@ -105,12 +105,8 @@ public class Menu extends JPanel implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 	}
 
 }
-
-
-
-
 
