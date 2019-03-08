@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Puzzle {
-	
+
 	// returns a copy of the given array
 	public static int[][] copyArray(int[][] array) {
 		int[][] copy = new int[array.length][];
@@ -14,7 +14,7 @@ public class Puzzle {
 		}
 		return copy;
 	}
-	
+
 	// returns whether the number can be placed in the given position
 	public static boolean safePlace(int[][] board, int row, int col, int num) {
 		for(int c=0;c<9;c++) {
@@ -25,17 +25,17 @@ public class Puzzle {
 			if(board[r][col] == num)
 				return false;
 		}
-		int rStart = (int)(row/3)*3;
-		int cStart = (int)(col/3)*3;
+		int rStart = row/3*3;
+		int cStart = col/3*3;
 		for(int r=rStart;r<rStart+3;r++) {
-			for(int c=cStart;c<cStart+3;c++) {		
-				if(board[r][c] == num) 
+			for(int c=cStart;c<cStart+3;c++) {
+				if(board[r][c] == num)
 					return false;
 			}
 		}
 		return true;
 	}
-	
+
 	// returns null if there is no solution
 	// returns solved puzzle otherwise
 	public static int[][] solvePuzzle(int[][] board) {
@@ -44,7 +44,7 @@ public class Puzzle {
 		}
 		return null;
 	}
-	
+
 	// returns a random puzzle with a unique solution
 	public static int[][] createPuzzle() {
 		ArrayList<Point> pos = new ArrayList<Point>();
@@ -70,7 +70,7 @@ public class Puzzle {
 		}
 		return board;
 	}
-	private static boolean solveBoard(int[][] board) {		
+	private static boolean solveBoard(int[][] board) {
 		boolean full = true;
 		int row = 0;
 		int col = 0;
@@ -118,7 +118,7 @@ public class Puzzle {
 		}
 		if(full) {
 			count[0]++;
-			return true;		
+			return true;
 		}
 		ArrayList<Integer> nums = new ArrayList<Integer>();
 		for(int i=1;i<=9;i++) {
