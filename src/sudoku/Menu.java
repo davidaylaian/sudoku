@@ -28,6 +28,7 @@ public class Menu extends JPanel implements ActionListener{
 		fileName = new JLabel();
 		hint = new JButton("Hint");
 		hint.setActionCommand("hint");
+		hint.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 0;
@@ -35,6 +36,7 @@ public class Menu extends JPanel implements ActionListener{
 
 		undo = new JButton("Undo");
 		undo.setActionCommand("undo");
+		undo.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 0;
@@ -42,6 +44,7 @@ public class Menu extends JPanel implements ActionListener{
 
 		redo = new JButton("Redo");
 		redo.setActionCommand("redo");
+		redo.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 3;
 		c.gridy = 0;
@@ -50,6 +53,7 @@ public class Menu extends JPanel implements ActionListener{
 		c.insets = new Insets(0, 0, 0, 0);
 		a = new JRadioButton();
 		a.setActionCommand("entry");
+		a.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 4;
 		c.gridy = 0;
@@ -64,19 +68,23 @@ public class Menu extends JPanel implements ActionListener{
 		c.insets = new Insets(10, 10, 10, 10);
 		gen = new JButton("Generate");
 		gen.setActionCommand("gen");
+		gen.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(gen, c);
 
 		solve = new JButton("Solve");
+		solve.setActionCommand("solve");
+		solve.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 1;
 		this.add(solve, c);
 
 		save = new JButton("Save");
-		save.setActionCommand("sa");
+		save.setActionCommand("save");
+		save.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 1;
@@ -84,6 +92,7 @@ public class Menu extends JPanel implements ActionListener{
 
 		open = new JButton("Open");
 		open.setActionCommand("open");
+		open.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 3;
 		c.gridy = 1;
@@ -92,6 +101,7 @@ public class Menu extends JPanel implements ActionListener{
 		c.insets = new Insets(0, 0, 0, 0);
 		b = new JRadioButton();
 		b.setActionCommand("solving");
+		b.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 4;
 		c.gridy = 1;
@@ -105,7 +115,19 @@ public class Menu extends JPanel implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		String eventName = e.getActionCommand();
+		if(eventName.equals("hint")) {
+			new PopUp( "Are you sure you want a hint?", "Yes", "No");
+		}
+		if(eventName.equals("solve")) {
+			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
+		}
+		if(eventName.equals("gen")) {
+			new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
+		}
+		if(eventName.equals("save")) {
+			
+		}
 	}
 
 }
