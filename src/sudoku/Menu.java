@@ -16,10 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 public class Menu extends JPanel implements ActionListener{
-	JLabel fileName;
-	JButton hint, undo, redo, gen, solve, save, open;
-	JRadioButton a,b;
-	JLabel entry, solving;
+	private JLabel fileName;
+	private JButton hint, undo, redo, gen, solve, save, open;
+	private JRadioButton a,b;
+	private JLabel entry, solving;
+	private PopUp p;
 	public Menu() {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -117,13 +118,13 @@ public class Menu extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String eventName = e.getActionCommand();
 		if(eventName.equals("hint")) {
-			new PopUp( "Are you sure you want a hint?", "Yes", "No");
+			p = new PopUp( "Are you sure you want a hint?", "Yes", "No");
 		}
 		if(eventName.equals("solve")) {
-			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
+			p = new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
 		}
 		if(eventName.equals("gen")) {
-			new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
+			p = new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
 		}
 		if(eventName.equals("save")) {
 			
@@ -131,4 +132,3 @@ public class Menu extends JPanel implements ActionListener{
 	}
 
 }
-
