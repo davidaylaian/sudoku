@@ -46,7 +46,6 @@ public class GameState
 	{
 		// stub
 	}
-
 	public Cell[][] getGameBoard()
 	{
 		return gameBoard;

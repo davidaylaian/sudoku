@@ -31,7 +31,7 @@ public class Menu extends JPanel implements ActionListener{
 		hint.setActionCommand("hint");
 		hint.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 1;
+		c.gridx = 0;
 		c.gridy = 0;
 		this.add(hint, c);
 
@@ -39,7 +39,7 @@ public class Menu extends JPanel implements ActionListener{
 		undo.setActionCommand("undo");
 		undo.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 2;
+		c.gridx = 1;
 		c.gridy = 0;
 		this.add(undo, c);
 
@@ -47,7 +47,7 @@ public class Menu extends JPanel implements ActionListener{
 		redo.setActionCommand("redo");
 		redo.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 3;
+		c.gridx = 2;
 		c.gridy = 0;
 		this.add(redo, c);
 
@@ -96,7 +96,7 @@ public class Menu extends JPanel implements ActionListener{
 		open.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 3;
-		c.gridy = 1;
+		c.gridy = 0;
 		this.add(open, c);
 
 		c.insets = new Insets(0, 0, 0, 0);
@@ -129,6 +129,15 @@ public class Menu extends JPanel implements ActionListener{
 		if(eventName.equals("save")) {
 			
 		}
+		if(eventName.equals("redo")) {
+			
+		}
+		if(eventName.equals("undo")) {
+			
+		}
+		if(eventName.equals("open")) {
+			
+    }
 	}
 
 }
