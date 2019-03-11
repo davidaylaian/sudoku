@@ -6,6 +6,10 @@ import javax.swing.JPanel;
 public class Window{
 	JFrame frame;
 	JPanel contentPane;
+	private static GameState game;
+	public static GameState getGameState() {
+		return game;
+	}
 	public Window()
 	{
 		frame = new JFrame("Sudoku");
@@ -14,7 +18,8 @@ public class Window{
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		contentPane.add(new Menu());
 		frame.setContentPane(contentPane);
-		frame.setSize(800, 800);
+		frame.setSize(630, 800);
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 }
