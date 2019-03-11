@@ -26,11 +26,25 @@ public class GameState
 		solution = newSolution;
 		history = new ArrayList<>();
 		historyIndex = 0;
+		gameBoard = new Cell[9][9];
 	}
 
-	public void setGameBoard(Cell[][] newGameBoard)
+	// warning: will reset the history as well. probably should alert the user when calling this method
+	public void resetGameBoard(Cell[][] newGameBoard)
 	{
 		gameBoard = newGameBoard;
+		history = new ArrayList<>();
+		historyIndex = 0;
+	}
+
+	public void setCell(Cell newCell, int indexX, int indexY)
+	{
+		// stub
+	}
+
+	public void getCell(int indexX, int indexY)
+	{
+		// stub
 	}
 
 	public Cell[][] getGameBoard()
