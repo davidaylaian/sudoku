@@ -7,9 +7,16 @@ public class Window{
 	JFrame frame;
 	JPanel contentPane;
 	private static GameState game;
+	
 	public static GameState getGameState() {
 		return game;
 	}
+
+	public static void setGameState(GameState g) {
+		game = g;
+	}
+
+	
 	public Window()
 	{
 		frame = new JFrame("Sudoku");
@@ -21,5 +28,7 @@ public class Window{
 		frame.setSize(630, 800);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		setGameState(new GameState(null));
 	}
 }

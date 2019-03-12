@@ -27,15 +27,11 @@ public class PopUp{
 		}
 	
 	}
-
 	
 	public boolean getAnswer() {
 		return yesnt;
 	}
-	
-	
-	
-	
+
 }
 	
 	
