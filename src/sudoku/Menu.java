@@ -129,7 +129,7 @@ public class Menu extends JPanel implements ActionListener{
 		if(eventName.equals("gen")) {
 			p = new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
 		}
-		if(eventName.equals("save")) {
+		if(eventName.equals("save")) {  
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.showSaveDialog(null);
 			File f = fileChooser.getSelectedFile();
@@ -139,11 +139,16 @@ public class Menu extends JPanel implements ActionListener{
 
 			}
 		}
-		if(eventName.equals("redo")) {
-			Window.getGameState().redo();
+ 
+			if(eventName.equals("redo")) {
+			if(Window.getGameState().redo_enabled()) {
+				Window.getGameState().redo();
+			}
 		}
 		if(eventName.equals("undo")) {
-			Window.getGameState().undo();
+			if(Window.getGameState().undo_enabled()) {
+				Window.getGameState().undo();
+			}
 		}
 		if(eventName.equals("open")) {
 			JFileChooser fileChooser = new JFileChooser();
@@ -155,6 +160,20 @@ public class Menu extends JPanel implements ActionListener{
 			
 			}
 		}
-	}
+	
 
+		}
+		if(eventName.equals("entry")) {
+			//toggles the solving button (b) if it is selected already
+			if(b.isSelected()) {
+				b.setSelected(false);
+			}
+		}
+		if(eventName.equals("solving")) {
+			//toggles the entry button (a) if it is selected already
+			if(a.isSelected()) {
+				a.setSelected(false);
+			}
+		}
+	}
 }
