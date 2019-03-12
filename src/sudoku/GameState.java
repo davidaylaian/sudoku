@@ -39,13 +39,21 @@ public class GameState
 
 	public void setCell(Cell newCell, int indexX, int indexY)
 	{
-		// stub
+		Change c = new Change();
+		c.indexX = indexX;
+		c.indexY = indexY;
+		c.modifiedCell = gameBoard[indexX][indexY];
+		history.add(c);
+		historyIndex++;
+
+		gameBoard[indexX][indexY] = newCell;
 	}
 
-	public void getCell(int indexX, int indexY)
+	public Cell getCell(int indexX, int indexY)
 	{
-		// stub
+		return gameBoard[indexX][indexY];
 	}
+
 	public Cell[][] getGameBoard()
 	{
 		return gameBoard;
@@ -58,12 +66,16 @@ public class GameState
 
 	public void undo()
 	{
-		// stub
+		Change c = history.get(historyIndex);
+		gameBoard[c.indexX][c.indexY] = c.modifiedCell;
+		historyIndex--;
 	}
 
 	public void redo()
 	{
-		// stub
+		Change c = history.get(historyIndex);
+		gameBoard[c.indexX][c.indexY] = c.modifiedCell;
+		historyIndex++;
 	}
 
 	public boolean undo_enabled()
