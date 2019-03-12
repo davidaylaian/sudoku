@@ -67,6 +67,11 @@ public class GameState
 		// stub
 	}
 
+	public boolean undo_enabled()
+	{
+		return historyIndex != 0;
+	}
+
 	public boolean redo_enabled()
 	{
 		return historyIndex == history.size() - 1;
