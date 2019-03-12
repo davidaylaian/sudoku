@@ -41,7 +41,7 @@ public class GameState
 	{
 		// stub
 	}
-
+  
 	public void getCell(int indexX, int indexY)
 	{
 		// stub
@@ -64,6 +64,11 @@ public class GameState
 	public void redo()
 	{
 		// stub
+	}
+
+	public boolean undo_enabled()
+	{
+		return historyIndex != 0;
 	}
 
 	public boolean redo_enabled()
