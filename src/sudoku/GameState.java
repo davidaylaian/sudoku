@@ -41,7 +41,7 @@ public class GameState
 	{
 		// stub
 	}
-
+  
 	public void getCell(int indexX, int indexY)
 	{
 		// stub
