@@ -8,9 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -121,23 +124,37 @@ public class Menu extends JPanel implements ActionListener{
 			p = new PopUp( "Are you sure you want a hint?", "Yes", "No");
 		}
 		if(eventName.equals("solve")) {
-			p = new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
+			p = new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No"); 
 		}
 		if(eventName.equals("gen")) {
 			p = new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
 		}
 		if(eventName.equals("save")) {
-			
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.showSaveDialog(null);
+			File f = fileChooser.getSelectedFile();
+			try {
+				Window.getGameState().save(f);
+			} catch (IOException E) {
+
+			}
 		}
 		if(eventName.equals("redo")) {
-			
+			Window.getGameState().redo();
 		}
 		if(eventName.equals("undo")) {
-			
+			Window.getGameState().undo();
 		}
 		if(eventName.equals("open")) {
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.showOpenDialog(null);
+			File f = fileChooser.getSelectedFile();
+			try {
+				Window.getGameState().save(f);
+			} catch (IOException E) {
 			
-    }
+			}
+		}
 	}
 
 }
