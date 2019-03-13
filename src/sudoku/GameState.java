@@ -48,7 +48,7 @@ public class GameState
 
 		gameBoard[indexX][indexY] = newCell;
   }
-  
+
 	public Cell getCell(int indexX, int indexY)
 	{
 		return gameBoard[indexX][indexY];
@@ -76,11 +76,6 @@ public class GameState
 		Change c = history.get(historyIndex);
 		gameBoard[c.indexX][c.indexY] = c.modifiedCell;
 		historyIndex++;
-	}
-
-	public boolean undo_enabled()
-	{
-		return historyIndex != 0;
 	}
 
 	public boolean undo_enabled()
