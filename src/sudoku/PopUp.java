@@ -58,27 +58,18 @@ public class PopUp implements ActionListener{
 					options[0]
 			);
 		}
-		
 	
-		
-		
-		if(answer == JOptionPane.YES_OPTION) {
-			yesnt = true;
-			
-		}else {
-			yesnt = false;
-		}
-		
+		yesnt = answer == JOptionPane.YES_OPTION;
 	}
 
 	//use this constructor for getting hints wanted
-	PopUp(String query) {
+	PopUp(String query)
+	{
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		
 		frame = new JFrame("Answer Before Proceeding");
-		
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		/* * Create a content pane with a BoxLayout and empty borders*/
+		
+		/* Create a content pane with a BoxLayout and empty borders*/
 		contentPane = new JPanel();
 		contentPane.setBorder(BorderFactory.createEmptyBorder(10, 100, 10, 100));
 		contentPane.setBackground(Color.white);
@@ -92,7 +83,6 @@ public class PopUp implements ActionListener{
 		valueDisplay = new JLabel("0");
 		contentPane.add(valueDisplay);
 		
-
 		/*Create a down Val button */
 		downValButton = new JButton("-1");
 		downValButton.setActionCommand("-1");
@@ -156,7 +146,5 @@ public class PopUp implements ActionListener{
 			frame.setVisible(false);
 		}
 		
-		
 	}
-
 }
