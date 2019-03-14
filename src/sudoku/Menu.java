@@ -135,12 +135,12 @@ public class Menu extends JPanel implements ActionListener{
 			File f = fileChooser.getSelectedFile();
 			try {
 				Window.getGameState().save(f);
-			} catch (IOException E) {
-
+			} catch (Exception E) {
+				new PopUp("Could not save file.", "Okay", "");
 			}
 		}
 
-			if(eventName.equals("redo")) {
+		if(eventName.equals("redo")) {
 			if(Window.getGameState().redo_enabled()) {
 				Window.getGameState().redo();
 			}
@@ -155,9 +155,9 @@ public class Menu extends JPanel implements ActionListener{
 			fileChooser.showOpenDialog(null);
 			File f = fileChooser.getSelectedFile();
 			try {
-				Window.getGameState().save(f);
-			} catch (IOException E) {
-
+				Window.setGameState(GameState.load(f));
+			} catch (Exception E) {
+				new PopUp("Could not load file.", "Okay", "");
 			}
 		}
 
