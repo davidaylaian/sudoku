@@ -11,9 +11,9 @@ public class Window {
 	JFrame frame;
 	JPanel contentPane;
 	private static GameState game;
-	public static final int ENTRY = 0;
-	public static final int SOLVING = 1;
-	public static int mode;
+
+	// true = solving, entry = false
+	public static boolean mode;
 
 	public static GameState getGameState() {
 		return game;
@@ -23,18 +23,16 @@ public class Window {
 		game = g;
 	}
 
-	public static int getMode() {
+	public static boolean getMode() {
 		return mode;
 	}
 
 	public static void entryMode() {
-		if(getMode() != ENTRY)
-			mode = ENTRY;
+		mode = false;
 	}
 
 	public static void solvingMode() {
-		if(getMode() != SOLVING)
-			mode = SOLVING;
+		mode = true;
 	}
 
 	public Window()

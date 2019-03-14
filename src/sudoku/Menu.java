@@ -116,21 +116,33 @@ public class Menu extends JPanel implements ActionListener{
 		c.gridx = 5;
 		c.gridy = 1;
 		this.add(solving, c);
-		
+
 		a.isSelected();
 	}
+
+	private void updateUndoRedo()
+	{
+		Window.getGameState().redo();
+		Window.getGameState().undo();
+	}
+
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e)
+	{
 		String eventName = e.getActionCommand();
+
 		if(eventName.equals("hint")) {
 			p = new PopUp( "Are you sure you want a hint?", "Yes", "No");
 		}
+
 		if(eventName.equals("solve")) {
 			p = new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
 		}
+
 		if(eventName.equals("gen")) {
 			p = new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
 		}
+
 		if(eventName.equals("save")) {
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.showSaveDialog(null);
@@ -143,15 +155,15 @@ public class Menu extends JPanel implements ActionListener{
 		}
 
 		if(eventName.equals("redo")) {
-			if(Window.getGameState().redo_enabled()) {
-				Window.getGameState().redo();
-			}
+			Window.getGameState().redo();
+			updateUndoRedo();
 		}
+
 		if(eventName.equals("undo")) {
-			if(Window.getGameState().undo_enabled()) {
-				Window.getGameState().undo();
-			}
+			Window.getGameState().undo();
+			updateUndoRedo();
 		}
+
 		if(eventName.equals("open")) {
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.showOpenDialog(null);
@@ -166,16 +178,13 @@ public class Menu extends JPanel implements ActionListener{
 		if(eventName.equals("entry")) {
 			//toggles the solving button (b) if it is selected already
 			Window.entryMode();
-			if(b.isSelected()) {
-				b.setSelected(false);
-			}
+			b.setSelected(false);
 		}
+
 		if(eventName.equals("solving")) {
 			//toggles the entry button (a) if it is selected already
 			Window.solvingMode();
-			if(a.isSelected()) {
-				a.setSelected(false);
-			}
+			a.setSelected(false);
 		}
 	}
 }
