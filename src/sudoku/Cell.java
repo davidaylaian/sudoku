@@ -88,6 +88,7 @@ public class Cell {
 			g.drawString(""+state, row*cellSide+width/2+16, col*cellSide+height/2+30);
 		}
 	}
+	
 	private void drawLines(Graphics g, int r, int c) {
 		for(int row=0;row<2;row++) {
 			int x = c*cellSide+cellSide*col/3;

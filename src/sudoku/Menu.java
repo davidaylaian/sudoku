@@ -138,7 +138,8 @@ public class Menu extends JPanel implements ActionListener{
 			try {
 				Window.getGameState().save(f);
 			} catch (Exception E) {
-				new PopUp("Could not save file.", "Okay", "");
+				if (f != null)
+					new PopUp("Could not save file.", "Okay", "");
 			}
 		}
 
@@ -159,7 +160,8 @@ public class Menu extends JPanel implements ActionListener{
 			try {
 				Window.setGameState(GameState.load(f));
 			} catch (Exception E) {
-				new PopUp("Could not load file.", "Okay", "");
+				if (f != null)
+					new PopUp("Could not load file.", "Okay", "");
 			}
 		}
 
