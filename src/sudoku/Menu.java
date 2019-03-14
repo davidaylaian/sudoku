@@ -116,6 +116,8 @@ public class Menu extends JPanel implements ActionListener{
 		c.gridx = 5;
 		c.gridy = 1;
 		this.add(solving, c);
+		
+		a.isSelected();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -163,12 +165,14 @@ public class Menu extends JPanel implements ActionListener{
 
 		if(eventName.equals("entry")) {
 			//toggles the solving button (b) if it is selected already
+			Window.entryMode();
 			if(b.isSelected()) {
 				b.setSelected(false);
 			}
 		}
 		if(eventName.equals("solving")) {
 			//toggles the entry button (a) if it is selected already
+			Window.solvingMode();
 			if(a.isSelected()) {
 				a.setSelected(false);
 			}
