@@ -41,8 +41,10 @@ public class Window {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-		contentPane.add(new Menu());
 		frame.setContentPane(contentPane);
+
+		Menu menu = new Menu();
+		contentPane.add(menu);
 
 		frame.setVisible(true);
 		frame.pack();
@@ -52,6 +54,9 @@ public class Window {
 		frame.setLocationRelativeTo(null);
 
 		entryMode();
-		setGameState(new GameState(null));
+		GameState state = new GameState(null);
+		setGameState(state);
+
+		menu.updateUndoRedo();
 	}
 }
