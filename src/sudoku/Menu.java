@@ -18,13 +18,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-public class Menu extends JPanel implements ActionListener{
+public class Menu extends JPanel implements ActionListener
+{
 	private JLabel fileName;
 	private JButton hint, undo, redo, gen, solve, save, open;
 	private JRadioButton a,b;
 	private JLabel entry, solving;
 	private PopUp p;
-	public Menu() {
+
+	public Menu()
+	{
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(10, 10, 10, 10);
@@ -120,10 +123,10 @@ public class Menu extends JPanel implements ActionListener{
 		a.isSelected();
 	}
 
-	private void updateUndoRedo()
+	protected void updateUndoRedo()
 	{
-		Window.getGameState().redo();
-		Window.getGameState().undo();
+		redo.setEnabled(Window.getGameState().redo_enabled());
+		undo.setEnabled(Window.getGameState().undo_enabled());
 	}
 
 	@Override
@@ -137,6 +140,7 @@ public class Menu extends JPanel implements ActionListener{
 
 		if(eventName.equals("solve")) {
 			p = new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
+
 		}
 
 		if(eventName.equals("gen")) {
