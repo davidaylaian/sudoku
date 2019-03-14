@@ -11,13 +11,13 @@ public class Cell {
 	private int[] lastClicked = new int[2];
 	private int count;
 	//	private boolean changeable;
-  
+
 	private int[][] nums = {
 			{1,2,3},
 			{4,5,6},
 			{7,8,9}
 };
-  
+
 	public Cell() {
 		state = 0;
 		resetEmphasis();
@@ -37,7 +37,7 @@ public class Cell {
 		for(int i=0;i<3;i++) {
 			for(int j=0;j<3;j++) {
 				if(emphasis[i][j]) {
-					state = nums[i][j]; 
+					state = nums[i][j];
 				}
 			}
 		}
@@ -53,7 +53,7 @@ public class Cell {
 				count--;
 				lastClicked[0] = r;
 				lastClicked[1] = c;
-			} 
+			}
 			else if(!emphasis[r][c]){
 				emphasis[r][c] = true;
 				count++;
@@ -86,7 +86,7 @@ public class Cell {
 					if(emphasis[r][c]) {
 						g.setColor(Color.white);
 					} else {
-            
+
 						g.setColor(Color.lightGray);
 					}
 					g.fillRect(col*cellSide+cellSide*c/3, row*cellSide+cellSide*r/3,cellSide/3, cellSide/3);
@@ -104,13 +104,14 @@ public class Cell {
 		for(int row=1;row<=2;row++) {
 			int x1 = c*cellSide;
 			int x2 = (c+1)*cellSide;
-			int y = r*cellSide+cellSide*row/3;	
+			int y = r*cellSide+cellSide*row/3;
 			g.drawLine(x1, y, x2, y);
 		}
 		for(int col=1;col<=2;col++) {
 			int x = c*cellSide+cellSide*col/3;
 			int y1 = r*cellSide;
-			int y2 = (r+1)*cellSide;	
+			int y2 = (r+1)*cellSide;
 			g.drawLine(x, y1, x, y2);
 		}
 	}
+}
