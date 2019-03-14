@@ -88,7 +88,7 @@ public class GameState
 		return historyIndex == history.size() - 1;
 	}
 
-	public void save(File f) throws IOException
+	public void save(File f) throws Exception
 	{
 		FileOutputStream FOS = new FileOutputStream(f);
 		XMLEncoder E = new XMLEncoder(FOS);
@@ -98,7 +98,7 @@ public class GameState
 		FOS.close();
 	}
 
-	public static GameState load(File f) throws IOException
+	public static GameState load(File f) throws Exception
 	{
 		FileInputStream FIS = new FileInputStream(f);
 		XMLDecoder D = new XMLDecoder(FIS);

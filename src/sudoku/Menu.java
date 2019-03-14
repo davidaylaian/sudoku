@@ -116,6 +116,8 @@ public class Menu extends JPanel implements ActionListener{
 		c.gridx = 5;
 		c.gridy = 1;
 		this.add(solving, c);
+		
+		a.isSelected();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -135,12 +137,12 @@ public class Menu extends JPanel implements ActionListener{
 			File f = fileChooser.getSelectedFile();
 			try {
 				Window.getGameState().save(f);
-			} catch (IOException E) {
-
+			} catch (Exception E) {
+				new PopUp("Could not save file.", "Okay", "");
 			}
 		}
 
-			if(eventName.equals("redo")) {
+		if(eventName.equals("redo")) {
 			if(Window.getGameState().redo_enabled()) {
 				Window.getGameState().redo();
 			}
@@ -155,20 +157,22 @@ public class Menu extends JPanel implements ActionListener{
 			fileChooser.showOpenDialog(null);
 			File f = fileChooser.getSelectedFile();
 			try {
-				Window.getGameState().save(f);
-			} catch (IOException E) {
-
+				Window.setGameState(GameState.load(f));
+			} catch (Exception E) {
+				new PopUp("Could not load file.", "Okay", "");
 			}
 		}
 
 		if(eventName.equals("entry")) {
 			//toggles the solving button (b) if it is selected already
+			Window.entryMode();
 			if(b.isSelected()) {
 				b.setSelected(false);
 			}
 		}
 		if(eventName.equals("solving")) {
 			//toggles the entry button (a) if it is selected already
+			Window.solvingMode();
 			if(a.isSelected()) {
 				a.setSelected(false);
 			}
