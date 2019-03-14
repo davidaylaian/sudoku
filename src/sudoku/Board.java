@@ -22,17 +22,8 @@ public class Board extends JPanel{
 			}
 		}
 		
-		this.addMouseListener(new MouseListener() {
+		this.addMouseListener(new MouseListener() {			
 			public void mouseClicked(MouseEvent e) {
-
-				int col = e.getX()/Cell.cellSide;
-				int row = e.getY()/Cell.cellSide;
-
-				int c = e.getX()/(Cell.cellSide/3);
-				int r = e.getY()/(Cell.cellSide/3);
-				board[row][col].click(r-(row*3), c-(col*3), true);
-
-				repaint();
 			}
 			
 			public void mouseEntered(MouseEvent e) {
@@ -45,8 +36,15 @@ public class Board extends JPanel{
 			}
 			
 			public void mouseReleased(MouseEvent e) {
-			}	
-			
+				int col = e.getX()/Cell.cellSide;
+				int row = e.getY()/Cell.cellSide;
+
+				int c = e.getX()/(Cell.cellSide/3);
+				int r = e.getY()/(Cell.cellSide/3);
+				board[row][col].click(r-(row*3), c-(col*3), true);
+
+				repaint();
+			}				
 		});
 	}
 
@@ -65,15 +63,6 @@ public class Board extends JPanel{
 		
 		this.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e) {
-
-				int col = e.getX()/Cell.cellSide;
-				int row = e.getY()/Cell.cellSide;
-
-				int c = e.getX()/(Cell.cellSide/3);
-				int r = e.getY()/(Cell.cellSide/3);
-				board[row][col].click(r-(row*3), c-(col*3), true);
-
-				repaint();
 			}
 			
 			public void mouseEntered(MouseEvent e) {
@@ -86,8 +75,15 @@ public class Board extends JPanel{
 			}
 			
 			public void mouseReleased(MouseEvent e) {
-			}	
-			
+				int col = e.getX()/Cell.cellSide;
+				int row = e.getY()/Cell.cellSide;
+
+				int c = e.getX()/(Cell.cellSide/3);
+				int r = e.getY()/(Cell.cellSide/3);
+				board[row][col].click(r-(row*3), c-(col*3), true);
+
+				repaint();
+			}			
 		});
 	}
 
