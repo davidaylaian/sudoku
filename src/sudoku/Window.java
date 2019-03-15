@@ -59,5 +59,8 @@ public class Window {
 		setGameState(state);
 
 		menu.updateUndoRedo();
+		menu.updateHint();
+		menu.updateGenerate();
+		menu.updateSolve();
 	}
 }

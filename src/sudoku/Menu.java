@@ -128,6 +128,15 @@ public class Menu extends JPanel implements ActionListener
 		redo.setEnabled(Window.getGameState().redo_enabled());
 		undo.setEnabled(Window.getGameState().undo_enabled());
 	}
+	public void updateSolve() {
+		solve.setEnabled(Window.getMode());
+	}
+	public void updateHint() {
+		hint.setEnabled(Window.getMode());
+	}
+	public void updateGenerate() {
+		hint.setEnabled(!Window.getMode());
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e)
