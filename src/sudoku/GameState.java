@@ -21,6 +21,9 @@ public class GameState
 	private List<Change> history;
 	private int historyIndex;
 
+	//for XML conventions
+	public GameState() {}
+	
 	public GameState(int[][] newSolution)
 	{
 		solution = newSolution;

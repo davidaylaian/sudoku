@@ -100,6 +100,7 @@ public class Cell {
 			g.drawString(""+state, col*cellSide+width/2+16, row*cellSide+height/2+30);
 		}
 	}
+	
 	private void drawLines(Graphics g, int r, int c) {
 		for(int row=1;row<=2;row++) {
 			int x1 = c*cellSide;
