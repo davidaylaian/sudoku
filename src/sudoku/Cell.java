@@ -8,9 +8,8 @@ public class Cell {
 	static int cellSide = 72;
 	private int state;
 	private boolean[][] emphasis = new boolean[3][3];
-	private int[] lastClicked = new int[2];
 	private int count;
-	//	private boolean changeable;
+//	private boolean changeable;
 
 	private int[][] nums = {
 			{1,2,3},
@@ -30,8 +29,10 @@ public class Cell {
 		}
 		count = 9;
 	}
+	
 	public Cell(int state) {
 		this.state = state;
+		
 	}
 	private void setState() {
 		for(int i=0;i<3;i++) {
@@ -46,23 +47,24 @@ public class Cell {
 		if(solvingMode) {
 			if(state!=0) {
 				state = 0;
-				click(lastClicked[0], lastClicked[1], solvingMode);
+			}
+			else if(emphasis[r][c]&&count==1) {
+				setState();
 			}
 			else if(emphasis[r][c]) {
 				emphasis[r][c] = false;
 				count--;
-				lastClicked[0] = r;
-				lastClicked[1] = c;
+				if(count==1) {
+					setState();
+				}
 			}
 			else if(!emphasis[r][c]){
 				emphasis[r][c] = true;
 				count++;
-				lastClicked[0] = r;
-				lastClicked[1] = c;
-			}
-			if(count==1) {
-				setState();
-			}
+				if(count==1) {
+					setState();
+				}
+			}	
 		} else {
 			if(state!=0) {
 				state = 0;
