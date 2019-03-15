@@ -45,6 +45,7 @@ public class Window {
 
 		Menu menu = new Menu();
 		contentPane.add(menu);
+		contentPane.add(new Board());
 
 		frame.setVisible(true);
 		frame.pack();
