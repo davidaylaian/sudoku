@@ -120,7 +120,7 @@ public class Menu extends JPanel implements ActionListener
 		c.gridy = 1;
 		this.add(solving, c);
 
-		a.isSelected();
+		a.setSelected(true);
 	}
 
 	protected void updateUndoRedo()
