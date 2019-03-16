@@ -23,13 +23,26 @@ public class GameState
 
 	//for XML conventions
 	public GameState() {}
-	
+
 	public GameState(int[][] newSolution)
 	{
 		solution = newSolution;
 		history = new ArrayList<>();
 		historyIndex = 0;
 		gameBoard = new Cell[9][9];
+
+		for (int x = 0; x < 9; x++)
+		{
+			for (int y = 0; y < 9; y++)
+			{
+				gameBoard[x][y] = new Cell();
+			}
+		}
+	}
+
+	public Cell[][] getBoard()
+	{
+		return gameBoard;
 	}
 
 	// warning: will reset the history as well. probably should alert the user when calling this method

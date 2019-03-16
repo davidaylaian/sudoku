@@ -7,21 +7,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Window {
+public class Window
+{
 	JFrame frame;
 	JPanel contentPane;
-	private static GameState game;
 
 	// true = solving, entry = false
 	public static boolean mode;
-
-	public static GameState getGameState() {
-		return game;
-	}
-
-	public static void setGameState(GameState g) {
-		game = g;
-	}
 
 	public static boolean getMode() {
 		return mode;
@@ -45,7 +37,7 @@ public class Window {
 
 		Menu menu = new Menu();
 		contentPane.add(menu);
-		contentPane.add(new Board());
+		contentPane.add(new BoardPanel());
 
 		frame.setVisible(true);
 		frame.pack();
@@ -55,9 +47,6 @@ public class Window {
 		frame.setLocationRelativeTo(null);
 
 		entryMode();
-		GameState state = new GameState(null);
-		setGameState(state);
-
 		menu.updateUndoRedo();
 		menu.updateHint();
 		menu.updateGenerate();

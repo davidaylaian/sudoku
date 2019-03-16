@@ -125,8 +125,8 @@ public class Menu extends JPanel implements ActionListener
 
 	protected void updateUndoRedo()
 	{
-		redo.setEnabled(Window.getGameState().redo_enabled());
-		undo.setEnabled(Window.getGameState().undo_enabled());
+		//redo.setEnabled(Window.getGameState().redo_enabled());
+		//undo.setEnabled(Window.getGameState().undo_enabled());
 	}
 	public void updateSolve() {
 		solve.setEnabled(Window.getMode());
@@ -161,7 +161,7 @@ public class Menu extends JPanel implements ActionListener
 			fileChooser.showSaveDialog(null);
 			File f = fileChooser.getSelectedFile();
 			try {
-				Window.getGameState().save(f);
+				//Window.getGameState().save(f);
 			} catch (Exception E) {
 				if (f != null)
 					new PopUp("Could not save file.", "Okay", "");
@@ -169,12 +169,12 @@ public class Menu extends JPanel implements ActionListener
 		}
 
 		if(eventName.equals("redo")) {
-			Window.getGameState().redo();
+			//Window.getGameState().redo();
 			updateUndoRedo();
 		}
 
 		if(eventName.equals("undo")) {
-			Window.getGameState().undo();
+			//Window.getGameState().undo();
 			updateUndoRedo();
 		}
 
@@ -183,7 +183,7 @@ public class Menu extends JPanel implements ActionListener
 			fileChooser.showOpenDialog(null);
 			File f = fileChooser.getSelectedFile();
 			try {
-				Window.setGameState(GameState.load(f));
+				//Window.setGameState(GameState.load(f));
 			} catch (Exception E) {
 				if (f != null)
 					new PopUp("Could not load file.", "Okay", "");
