@@ -20,7 +20,6 @@ import javax.swing.JRadioButton;
 
 public class Menu extends JPanel implements ActionListener
 {
-	private JLabel fileName;
 	private JButton hint, undo, redo, gen, solve, save, open;
 	private JRadioButton a,b;
 	private JLabel entry, solving;
@@ -32,7 +31,6 @@ public class Menu extends JPanel implements ActionListener
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(10, 10, 10, 10);
 
-		fileName = new JLabel();
 		hint = new JButton("Hint");
 		hint.setActionCommand("hint");
 		hint.addActionListener(this);
@@ -123,17 +121,19 @@ public class Menu extends JPanel implements ActionListener
 		a.setSelected(true);
 	}
 
-	protected void updateUndoRedo()
-	{
-		//redo.setEnabled(Window.getGameState().redo_enabled());
-		//undo.setEnabled(Window.getGameState().undo_enabled());
+	protected void updateUndoRedo() {
+		redo.setEnabled(Window.getGameState().redo_enabled());
+		undo.setEnabled(Window.getGameState().undo_enabled());
 	}
+	
 	public void updateSolve() {
 		solve.setEnabled(Window.getMode());
 	}
+	
 	public void updateHint() {
 		hint.setEnabled(Window.getMode());
 	}
+	
 	public void updateGenerate() {
 		hint.setEnabled(!Window.getMode());
 	}
@@ -161,7 +161,7 @@ public class Menu extends JPanel implements ActionListener
 			fileChooser.showSaveDialog(null);
 			File f = fileChooser.getSelectedFile();
 			try {
-				//Window.getGameState().save(f);
+				Window.getGameState().save(f);
 			} catch (Exception E) {
 				if (f != null)
 					new PopUp("Could not save file.", "Okay", "");
@@ -169,13 +169,11 @@ public class Menu extends JPanel implements ActionListener
 		}
 
 		if(eventName.equals("redo")) {
-			//Window.getGameState().redo();
-			updateUndoRedo();
+			Window.getGameState().redo();
 		}
 
 		if(eventName.equals("undo")) {
-			//Window.getGameState().undo();
-			updateUndoRedo();
+			Window.getGameState().undo();
 		}
 
 		if(eventName.equals("open")) {
@@ -183,7 +181,7 @@ public class Menu extends JPanel implements ActionListener
 			fileChooser.showOpenDialog(null);
 			File f = fileChooser.getSelectedFile();
 			try {
-				//Window.setGameState(GameState.load(f));
+				Window.setGameState(GameState.load(f));
 			} catch (Exception E) {
 				if (f != null)
 					new PopUp("Could not load file.", "Okay", "");
@@ -191,7 +189,7 @@ public class Menu extends JPanel implements ActionListener
 		}
 
 		if(eventName.equals("entry")) {
-			//toggles the solving button (b) if it is selected already
+			// toggles the solving button (b) if it is selected already
 			Window.entryMode();
 			b.setSelected(false);
 		}
@@ -201,5 +199,7 @@ public class Menu extends JPanel implements ActionListener
 			Window.solvingMode();
 			a.setSelected(false);
 		}
+		
+		updateUndoRedo();
 	}
 }

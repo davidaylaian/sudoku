@@ -9,9 +9,12 @@ import javax.swing.JPanel;
 
 public class Window
 {
-	JFrame frame;
-	JPanel contentPane;
-
+	private static JFrame frame;
+	private static JPanel contentPane;
+	private static GameState gs;
+	private static Menu menu;
+	private static BoardPanel board;
+	
 	// true = solving, entry = false
 	public static boolean mode;
 
@@ -26,7 +29,20 @@ public class Window
 	public static void solvingMode() {
 		mode = true;
 	}
-
+	
+	public static GameState getGameState() {
+		return gs;
+	}
+	
+	public static void setGameState(GameState newState) {
+		gs = newState;
+	}
+	
+	public static void passUpdateUndoRedo()
+	{
+		menu.updateUndoRedo();
+	}
+	
 	public Window()
 	{
 		frame = new JFrame("Sudoku");
@@ -35,9 +51,10 @@ public class Window
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		frame.setContentPane(contentPane);
 
-		Menu menu = new Menu();
+		menu = new Menu();
+		board = new BoardPanel();
 		contentPane.add(menu);
-		contentPane.add(new BoardPanel());
+		contentPane.add(board);
 
 		frame.setVisible(true);
 		frame.pack();

@@ -11,8 +11,6 @@ import java.awt.color.*;
 
 public class BoardPanel extends JPanel
 {
-	private GameState state;
-
 	void setup()
 	{
 		setPreferredSize(new Dimension(648, 648));
@@ -26,45 +24,51 @@ public class BoardPanel extends JPanel
 			public void mousePressed(MouseEvent e) {}
 
 			public void mouseReleased(MouseEvent e) {
+				
 				int col = e.getX()/Cell.cellSide;
 				int row = e.getY()/Cell.cellSide;
 
 				int c = e.getX()/(Cell.cellSide/3);
 				int r = e.getY()/(Cell.cellSide/3);
 
-				Cell clone = (Cell) state.getCell(row, col).clone();
-				clone.click(r-(row*3), c-(col*3), true);
-				state.setCell(clone, row, col);
+				GameState state = Window.getGameState();
+				
+				Cell copy = (Cell) state.getCell(row, col).makeCopy();
+				copy.click(r-(row*3), c-(col*3), true);
+				state.setCell(copy, row, col);
 
+				Window.passUpdateUndoRedo();
 				repaint();
 			}
 		});
 	}
-
-	BoardPanel()
-	{
-		state = new GameState(null);
+	
+	BoardPanel() {
+		Window.setGameState(new GameState(null));
 		setup();
 	}
 
-	BoardPanel(int[][] generatedBoard)
-	{
-		state = new GameState(generatedBoard);
+	BoardPanel(int[][] generatedBoard) {
+		Window.setGameState(new GameState(generatedBoard));
 		setup();
 	}
-
+	
 	public void paintComponent(Graphics g)
 	{
+		GameState state = Window.getGameState();
 		super.paintComponent(g);
+		
 		for(int r=0; r<9; r++) {
 			for(int c=0; c<9; c++) {
 				state.getCell(r, c).draw(g, r, c);
 			}
 		}
+		
 		drawGrid(g);
 	}
 
 	private void drawGrid(Graphics g) {
+		
 		for(int x=0; x<648; x+=72) {
 			if(x%216==0) {
 				g.fillRect(x-2, 0, 5, 648);
@@ -72,6 +76,7 @@ public class BoardPanel extends JPanel
 				g.fillRect(x-1, 0, 3, 648);
 			}
 		}
+		
 		for(int y=0; y<648; y+=72) {
 			if(y%216==0) {
 				g.fillRect(0, y-2, 648, 5);
@@ -81,11 +86,12 @@ public class BoardPanel extends JPanel
 		}
 	}
 
+	/*
 	public static void main(String[] str) {
 		JFrame frame = new JFrame("Test");
 		BoardPanel b = new BoardPanel();
 		frame.setContentPane(b);
 		frame.pack();
 		frame.setVisible(true);
-	}
+	}*/
 }
