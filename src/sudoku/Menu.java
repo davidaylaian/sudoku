@@ -120,13 +120,22 @@ public class Menu extends JPanel implements ActionListener
 		c.gridy = 1;
 		this.add(solving, c);
 
-		a.isSelected();
+		a.setSelected(true);
 	}
 
 	protected void updateUndoRedo()
 	{
 		//redo.setEnabled(Window.getGameState().redo_enabled());
 		//undo.setEnabled(Window.getGameState().undo_enabled());
+	}
+	public void updateSolve() {
+		solve.setEnabled(Window.getMode());
+	}
+	public void updateHint() {
+		hint.setEnabled(Window.getMode());
+	}
+	public void updateGenerate() {
+		hint.setEnabled(!Window.getMode());
 	}
 
 	@Override

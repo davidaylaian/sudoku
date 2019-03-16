@@ -48,5 +48,8 @@ public class Window
 
 		entryMode();
 		menu.updateUndoRedo();
+		menu.updateHint();
+		menu.updateGenerate();
+		menu.updateSolve();
 	}
 }

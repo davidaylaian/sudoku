@@ -4,13 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class Cell {
+public class Cell implements Cloneable{
 	static int cellSide = 72;
 	private int state;
 	private boolean[][] emphasis = new boolean[3][3];
-	private int[] lastClicked = new int[2];
 	private int count;
-	//	private boolean changeable;
+//	private boolean changeable;
 
 	public Object clone()
 	{
@@ -37,8 +36,10 @@ public class Cell {
 		}
 		count = 9;
 	}
+	
 	public Cell(int state) {
 		this.state = state;
+		
 	}
 	private void setState() {
 		for(int i=0;i<3;i++) {
@@ -53,23 +54,24 @@ public class Cell {
 		if(solvingMode) {
 			if(state!=0) {
 				state = 0;
-				click(lastClicked[0], lastClicked[1], solvingMode);
+			}
+			else if(emphasis[r][c]&&count==1) {
+				setState();
 			}
 			else if(emphasis[r][c]) {
 				emphasis[r][c] = false;
 				count--;
-				lastClicked[0] = r;
-				lastClicked[1] = c;
+				if(count==1) {
+					setState();
+				}
 			}
 			else if(!emphasis[r][c]){
 				emphasis[r][c] = true;
 				count++;
-				lastClicked[0] = r;
-				lastClicked[1] = c;
-			}
-			if(count==1) {
-				setState();
-			}
+				if(count==1) {
+					setState();
+				}
+			}	
 		} else {
 			if(state!=0) {
 				state = 0;
@@ -121,5 +123,21 @@ public class Cell {
 			int y2 = (r+1)*cellSide;
 			g.drawLine(x, y1, x, y2);
 		}
+	}
+	public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+	
+	public static void main(String[] str) {
+		Cell del = new Cell();
+		
+		try {
+			System.out.println(del==(Cell)del.clone());
+		//	Cell delTemp = (Cell) del.clone();
+		} catch (CloneNotSupportedException e) {
+		
+			
+		}
+		
 	}
 }
