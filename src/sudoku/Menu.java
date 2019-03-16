@@ -137,6 +137,15 @@ public class Menu extends JPanel implements ActionListener
 	public void updateGenerate() {
 		hint.setEnabled(!Window.getMode());
 	}
+	public void updateSolve() {
+		solve.setEnabled(Window.getMode());
+	}
+	public void updateHint() {
+		hint.setEnabled(Window.getMode());
+	}
+	public void updateGenerate() {
+		gen.setEnabled(!(Window.getMode()));
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e)
@@ -149,11 +158,11 @@ public class Menu extends JPanel implements ActionListener
 
 		if(eventName.equals("solve")) {
 			p = new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
-
 		}
 
 		if(eventName.equals("gen")) {
 			p = new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
+			Puzzle.createPuzzle();
 		}
 
 		if(eventName.equals("save")) {
@@ -193,12 +202,18 @@ public class Menu extends JPanel implements ActionListener
 		if(eventName.equals("entry")) {
 			//toggles the solving button (b) if it is selected already
 			Window.entryMode();
+			updateHint();
+			updateGenerate();
+			updateSolve();
 			b.setSelected(false);
 		}
 
 		if(eventName.equals("solving")) {
 			//toggles the entry button (a) if it is selected already
 			Window.solvingMode();
+			updateHint();
+			updateGenerate();
+			updateSolve();
 			a.setSelected(false);
 		}
 	}
