@@ -125,15 +125,15 @@ public class Menu extends JPanel implements ActionListener
 		redo.setEnabled(Window.getGameState().redo_enabled());
 		undo.setEnabled(Window.getGameState().undo_enabled());
 	}
-	
+
 	public void updateSolve() {
 		solve.setEnabled(Window.getMode());
 	}
-	
+
 	public void updateHint() {
 		hint.setEnabled(Window.getMode());
 	}
-	
+
 	public void updateGenerate() {
 		hint.setEnabled(!Window.getMode());
 	}
@@ -170,10 +170,12 @@ public class Menu extends JPanel implements ActionListener
 
 		if(eventName.equals("redo")) {
 			Window.getGameState().redo();
+			Window.repaintBoard();
 		}
 
 		if(eventName.equals("undo")) {
 			Window.getGameState().undo();
+			Window.repaintBoard();
 		}
 
 		if(eventName.equals("open")) {
@@ -199,7 +201,7 @@ public class Menu extends JPanel implements ActionListener
 			Window.solvingMode();
 			a.setSelected(false);
 		}
-		
+
 		updateUndoRedo();
 	}
 }

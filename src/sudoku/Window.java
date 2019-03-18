@@ -14,7 +14,7 @@ public class Window
 	private static GameState gs;
 	private static Menu menu;
 	private static BoardPanel board;
-	
+
 	// true = solving, entry = false
 	public static boolean mode;
 
@@ -29,20 +29,25 @@ public class Window
 	public static void solvingMode() {
 		mode = true;
 	}
-	
+
 	public static GameState getGameState() {
 		return gs;
 	}
-	
+
 	public static void setGameState(GameState newState) {
 		gs = newState;
 	}
-	
+
 	public static void passUpdateUndoRedo()
 	{
 		menu.updateUndoRedo();
 	}
-	
+
+	public static void repaintBoard()
+	{
+		board.repaint();
+	}
+
 	public Window()
 	{
 		frame = new JFrame("Sudoku");
