@@ -36,6 +36,7 @@ public class BoardPanel extends JPanel
 				Cell copy = state.getCell(row, col).makeCopy();
 				copy.click(r-(row*3), c-(col*3), true);
 				state.setCell(copy, row, col);
+				System.out.println(copy);
 
 				Window.passUpdateUndoRedo();
 				repaint();

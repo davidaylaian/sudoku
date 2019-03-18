@@ -4,24 +4,28 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class Cell {
+public class Cell implements Cloneable {
 	static int cellSide = 72;
 	private int state;
-	private boolean[][] emphasis = new boolean[3][3];
+	public boolean[][] emphasis = new boolean[3][3];
 	private int count;
 	//private boolean changeable;
-	
+
 	private static final int[][] nums = {
 			{1,2,3},
 			{4,5,6},
 			{7,8,9}
 	};
-	
+
 	public Cell() {
 		state = 0;
 		resetEmphasis();
 	}
-	
+
+	public Object clone() throws CloneNotSupportedException {
+return super.clone();
+	}
+
 	public Cell makeCopy() {
 		Cell copy = new Cell();
 		copy.state		= this.state;
@@ -29,7 +33,9 @@ public class Cell {
 		copy.count		= this.count;
 		return copy;
 	}
-	
+
+
+
 	private void resetEmphasis() {
 		for(int r=0;r<3;r++) {
 			for(int c=0;c<3;c++) {
@@ -38,10 +44,10 @@ public class Cell {
 		}
 		count = 9;
 	}
-	
+
 	public Cell(int state) {
 		this.state = state;
-		
+
 	}
 	private void setState() {
 		for(int i=0;i<3;i++) {
@@ -73,7 +79,7 @@ public class Cell {
 				if(count==1) {
 					setState();
 				}
-			}	
+			}
 		} else {
 			if(state!=0) {
 				state = 0;
@@ -125,5 +131,5 @@ public class Cell {
 			int y2 = (r+1)*cellSide;
 			g.drawLine(x, y1, x, y2);
 		}
-	}	
+	}
 }

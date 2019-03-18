@@ -59,9 +59,20 @@ public class GameState
 		c.indexX = row;
 		c.indexY = col;
 		c.modifiedCell = gameBoard[row][col];
+
+		for (int x = 0; x < 3; x++)
+		{
+			for (int y = 0; y < 3; y++)
+			{
+				System.out.print(gameBoard[c.indexX][c.indexY].emphasis[x][y] ? "T " : "F ");
+			}
+
+			System.out.println();
+		}
+
 		history.add(c);
 		historyIndex++;
-		
+
 		gameBoard[row][col] = newCell;
   }
 
@@ -85,6 +96,16 @@ public class GameState
 		Change c = history.get(historyIndex);
 		gameBoard[c.indexX][c.indexY] = c.modifiedCell;
 		historyIndex--;
+
+		for (int x = 0; x < 3; x++)
+		{
+			for (int y = 0; y < 3; y++)
+			{
+				System.out.print(gameBoard[c.indexX][c.indexY].emphasis[x][y] ? "T " : "F ");
+			}
+
+			System.out.println();
+		}
 	}
 
 	public void redo()
@@ -92,6 +113,7 @@ public class GameState
 		Change c = history.get(historyIndex+1);
 		gameBoard[c.indexX][c.indexY] = c.modifiedCell;
 		historyIndex++;
+		System.out.println(gameBoard[c.indexX][c.indexY]);
 	}
 
 	public boolean undo_enabled()
