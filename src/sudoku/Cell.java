@@ -4,12 +4,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class Cell {
+public class Cell implements Cloneable{
 	static int cellSide = 72;
 	private int state;
 	private boolean[][] emphasis = new boolean[3][3];
 	private int count;
 //	private boolean changeable;
+
+	public Object clone()
+	{
+		// stub
+		return null;
+	}
 
 	private int[][] nums = {
 			{1,2,3},
@@ -21,6 +27,7 @@ public class Cell {
 		state = 0;
 		resetEmphasis();
 	}
+
 	private void resetEmphasis() {
 		for(int r=0;r<3;r++) {
 			for(int c=0;c<3;c++) {
@@ -102,7 +109,7 @@ public class Cell {
 			g.drawString(""+state, col*cellSide+width/2+16, row*cellSide+height/2+30);
 		}
 	}
-	
+
 	private void drawLines(Graphics g, int r, int c) {
 		for(int row=1;row<=2;row++) {
 			int x1 = c*cellSide;
@@ -116,5 +123,21 @@ public class Cell {
 			int y2 = (r+1)*cellSide;
 			g.drawLine(x, y1, x, y2);
 		}
+	}
+	public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+	
+	public static void main(String[] str) {
+		Cell del = new Cell();
+		
+		try {
+			System.out.println(del==(Cell)del.clone());
+		//	Cell delTemp = (Cell) del.clone();
+		} catch (CloneNotSupportedException e) {
+		
+			
+		}
+		
 	}
 }
