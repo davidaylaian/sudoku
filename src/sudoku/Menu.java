@@ -24,7 +24,6 @@ public class Menu extends JPanel implements ActionListener
 	private JButton hint, undo, redo, gen, solve, save, open;
 	private JRadioButton a,b;
 	private JLabel entry, solving;
-	private PopUp p;
 
 	public Menu()
 	{
@@ -153,16 +152,16 @@ public class Menu extends JPanel implements ActionListener
 		String eventName = e.getActionCommand();
 
 		if(eventName.equals("hint")) {
-			p = new PopUp( "Are you sure you want a hint?", "Yes", "No");
+			new PopUp( "Are you sure you want a hint?", "Yes", "No");
 		}
 
 		if(eventName.equals("solve")) {
-			p = new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
+
+			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
 		}
 
 		if(eventName.equals("gen")) {
-			p = new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
-			Puzzle.createPuzzle();
+			new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
 		}
 
 		if(eventName.equals("save")) {
