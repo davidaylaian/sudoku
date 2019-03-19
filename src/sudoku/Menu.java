@@ -2,16 +2,11 @@ package sudoku;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.WindowListener;
 import java.io.File;
-import java.io.IOException;
-
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -20,10 +15,10 @@ import javax.swing.JRadioButton;
 
 public class Menu extends JPanel implements ActionListener
 {
-	private JLabel fileName;
 	private JButton hint, undo, redo, gen, solve, save, open;
 	private JRadioButton a,b;
 	private JLabel entry, solving;
+	private PopUp p;
 
 
 	public Menu()
@@ -32,7 +27,6 @@ public class Menu extends JPanel implements ActionListener
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(10, 10, 10, 10);
 
-		fileName = new JLabel();
 		hint = new JButton("Hint");
 		hint.setActionCommand("hint");
 		hint.addActionListener(this);
@@ -158,18 +152,13 @@ public class Menu extends JPanel implements ActionListener
 
 		if(eventName.equals("solve")) {
 
-			p = new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
+			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
 		}
 
 		if(eventName.equals("gen")) {
-			p = new PopUp("Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
-			if(p.getYesOrNo()) {
-			//	System.out.println("reee");
-				int[][] puzzle = Puzzle.createPuzzle();
-				//Puzzle.print(puzzle);
-				Window.b.setBoardPanel(puzzle);
-				Window.b.repaint();
-			}
+			new PopUp( "Generate a new puzzle (This puzzle will be lost)");
+			Puzzle.createPuzzle();
+
 		}
 
 		if(eventName.equals("save")) {
@@ -208,13 +197,28 @@ public class Menu extends JPanel implements ActionListener
 
 		if(eventName.equals("entry")) {
 			//toggles the solving button (b) if it is selected already
-			Window.mode = false;
-			Window.reset();
 
-			updateHint();
-			updateGenerate();
-			updateSolve();
-			b.setSelected(false);
+			if(Window.getMode()) {
+				b.setSelected(false);
+				p = new PopUp( "Switching to Entry Mode will erase the current puzzle", "Ok", "Cancel");
+				if(p.getYesOrNo()) {
+					Window.mode = false;
+					updateHint();
+					updateGenerate();
+					updateSolve();
+					b.setSelected(false);
+				}else {
+					a.setSelected(false);
+					b.setSelected(true);
+				}
+			}else {
+				Window.mode = false;
+				updateHint();
+				updateGenerate();
+				updateSolve();
+				b.setSelected(false);
+			}
+
 		}
 
 		if(eventName.equals("solving")) {
@@ -228,3 +232,5 @@ public class Menu extends JPanel implements ActionListener
 		}
 	}
 }
+
+
