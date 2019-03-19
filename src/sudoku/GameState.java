@@ -63,7 +63,7 @@ public class GameState
 		historyIndex++;
 
 		gameBoard[indexX][indexY] = newCell;
-  }
+	}
 
 	public Cell getCell(int indexX, int indexY)
 	{

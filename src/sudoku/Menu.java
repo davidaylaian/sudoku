@@ -25,6 +25,7 @@ public class Menu extends JPanel implements ActionListener
 	private JRadioButton a,b;
 	private JLabel entry, solving;
 
+
 	public Menu()
 	{
 		this.setLayout(new GridBagLayout());
@@ -127,18 +128,26 @@ public class Menu extends JPanel implements ActionListener
 		//redo.setEnabled(Window.getGameState().redo_enabled());
 		//undo.setEnabled(Window.getGameState().undo_enabled());
 	}
-	
+
 	public void updateSolve() {
-		solve.setEnabled(Window.getMode());
+		solve.setEnabled(Window.mode);
 	}
 	public void updateHint() {
-		hint.setEnabled(Window.getMode());
+		hint.setEnabled(Window.mode);
 	}
 	public void updateGenerate() {
-		gen.setEnabled(!(Window.getMode()));
+		hint.setEnabled(!Window.mode);
 	}
+	//	public void updateSolve() {
+	//		solve.setEnabled(Window.getMode());
+	//	}
+	//	public void updateHint() {
+	//		hint.setEnabled(Window.getMode());
+	//	}
+	//	public void updateGenerate() {
+	//		gen.setEnabled(!(Window.getMode()));
+	//	}
 
-	@Override
 	public void actionPerformed(ActionEvent e)
 	{
 		String eventName = e.getActionCommand();
@@ -149,11 +158,18 @@ public class Menu extends JPanel implements ActionListener
 
 		if(eventName.equals("solve")) {
 
-			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
+			p = new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
 		}
 
 		if(eventName.equals("gen")) {
-			new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
+			p = new PopUp("Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
+			if(p.getYesOrNo()) {
+			//	System.out.println("reee");
+				int[][] puzzle = Puzzle.createPuzzle();
+				//Puzzle.print(puzzle);
+				Window.b.setBoardPanel(puzzle);
+				Window.b.repaint();
+			}
 		}
 
 		if(eventName.equals("save")) {
@@ -192,7 +208,9 @@ public class Menu extends JPanel implements ActionListener
 
 		if(eventName.equals("entry")) {
 			//toggles the solving button (b) if it is selected already
-			Window.entryMode();
+			Window.mode = false;
+			Window.reset();
+
 			updateHint();
 			updateGenerate();
 			updateSolve();
@@ -201,11 +219,12 @@ public class Menu extends JPanel implements ActionListener
 
 		if(eventName.equals("solving")) {
 			//toggles the entry button (a) if it is selected already
-			Window.solvingMode();
+			Window.mode = true;
 			updateHint();
 			updateGenerate();
 			updateSolve();
 			a.setSelected(false);
+			Window.reset();
 		}
 	}
 }

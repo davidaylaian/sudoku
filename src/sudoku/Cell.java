@@ -11,24 +11,19 @@ public class Cell implements Cloneable{
 	private int count;
 //	private boolean changeable;
 
-	public Object clone()
-	{
-		// stub
-		return null;
-	}
-
 	private int[][] nums = {
 			{1,2,3},
 			{4,5,6},
 			{7,8,9}
-};
+	};
 
 	public Cell() {
 		state = 0;
 		resetEmphasis();
 	}
 
-	private void resetEmphasis() {
+
+	public void resetEmphasis() {
 		for(int r=0;r<3;r++) {
 			for(int c=0;c<3;c++) {
 				emphasis[r][c] = true;
@@ -39,8 +34,8 @@ public class Cell implements Cloneable{
 	
 	public Cell(int state) {
 		this.state = state;
-		
 	}
+  
 	private void setState() {
 		for(int i=0;i<3;i++) {
 			for(int j=0;j<3;j++) {
@@ -50,6 +45,7 @@ public class Cell implements Cloneable{
 			}
 		}
 	}
+  
 	public void click(int r, int c, boolean solvingMode) {
 		if(solvingMode) {
 			if(state!=0) {
@@ -80,6 +76,7 @@ public class Cell implements Cloneable{
 			}
 		}
 	}
+  
 	public void draw(Graphics g, int row, int col) {
 		Font f = new Font("Roboto", Font.PLAIN, 30);
 		g.setFont(f);
@@ -127,17 +124,4 @@ public class Cell implements Cloneable{
 	public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-	
-	public static void main(String[] str) {
-		Cell del = new Cell();
-		
-		try {
-			System.out.println(del==(Cell)del.clone());
-		//	Cell delTemp = (Cell) del.clone();
-		} catch (CloneNotSupportedException e) {
-		
-			
-		}
-		
-	}
 }

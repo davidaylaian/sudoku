@@ -1,3 +1,4 @@
+
 package sudoku;
 
 import java.awt.Color;
@@ -9,56 +10,50 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.color.*;
 
-public class BoardPanel extends JPanel
-{
-	private GameState state;
+public class BoardPanel extends JPanel{
 
-	void setup()
-	{
+	private Cell[][] board = new Cell[9][9];
+	
+	BoardPanel() {
 		setPreferredSize(new Dimension(648, 648));
 		this.setBackground(Color.white);
-
-		this.addMouseListener(new MouseListener()
-		{
-			public void mouseClicked(MouseEvent e) {}
-			public void mouseEntered(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {}
-			public void mousePressed(MouseEvent e) {}
-
+		for(int r=0;r<9;r++) {
+			for(int c=0;c<9;c++) {
+				board[r][c] = new Cell();
+			}
+		}
+		
+		this.addMouseListener(new MouseListener() {			
+			public void mouseClicked(MouseEvent e) {
+			}
+			
+			public void mouseEntered(MouseEvent e) {
+			}
+			
+			public void mouseExited(MouseEvent e) {
+			}
+			
+			public void mousePressed(MouseEvent e) {
+			}
+			
 			public void mouseReleased(MouseEvent e) {
 				int col = e.getX()/Cell.cellSide;
 				int row = e.getY()/Cell.cellSide;
 
 				int c = e.getX()/(Cell.cellSide/3);
 				int r = e.getY()/(Cell.cellSide/3);
-
-				Cell clone = (Cell) state.getCell(row, col).clone();
-				clone.click(r-(row*3), c-(col*3), true);
-				state.setCell(clone, row, col);
+				board[row][col].click(r-(row*3), c-(col*3), Window.mode);
 
 				repaint();
-			}
+			}				
 		});
 	}
-
-	BoardPanel()
-	{
-		state = new GameState(null);
-		setup();
-	}
-
-	BoardPanel(int[][] generatedBoard)
-	{
-		state = new GameState(generatedBoard);
-		setup();
-	}
-
-	public void paintComponent(Graphics g)
-	{
+  
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		for(int r=0; r<9; r++) {
 			for(int c=0; c<9; c++) {
-				state.getCell(r, c).draw(g, r, c);
+				board[r][c].draw(g, r, c);
 			}
 		}
 		drawGrid(g);
@@ -80,12 +75,12 @@ public class BoardPanel extends JPanel
 			}
 		}
 	}
-
-	public static void main(String[] str) {
-		JFrame frame = new JFrame("Test");
-		BoardPanel b = new BoardPanel();
-		frame.setContentPane(b);
-		frame.pack();
-		frame.setVisible(true);
+	public void reset() {
+		for(int r=0;r<9;r++) {
+			for(int c=0;c<9;c++) {
+				board[r][c].resetEmphasis();
+			}
+		}
 	}
 }
+
