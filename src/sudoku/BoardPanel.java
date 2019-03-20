@@ -11,7 +11,13 @@ import java.awt.color.*;
 
 public class BoardPanel extends JPanel
 {
-	void setup()
+	BoardPanel()
+	{
+		Window.setGameState(new GameState(null));
+		setup();
+	}
+
+	private void setup()
 	{
 		setPreferredSize(new Dimension(648, 648));
 		this.setBackground(Color.white);
@@ -46,16 +52,6 @@ public class BoardPanel extends JPanel
 	public void repaint()
 	{
 		super.repaint();
-	}
-
-	BoardPanel() {
-		Window.setGameState(new GameState(null));
-		setup();
-	}
-
-	BoardPanel(int[][] generatedBoard) {
-		Window.setGameState(new GameState(generatedBoard));
-		setup();
 	}
 
 	public void paintComponent(Graphics g)

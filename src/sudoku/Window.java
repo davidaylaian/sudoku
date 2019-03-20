@@ -49,9 +49,10 @@ public class Window
 	{
 		board.repaint();
 	}
-	
-	public static void reset() {
-		b.reset();
+
+	public static void resetEmphasis() {
+
+		game.resetEmphasis();
 		b.repaint();
 	}
 
@@ -70,7 +71,7 @@ public class Window
 
 		frame.setVisible(true);
 		frame.pack();
-		
+
 //		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 //		frame.setLocation((int) ((screen.width/2) - (frame.size().getWidth()/2)), (int) ((screen.height/2) - (frame.size().getHeight()/2)));
 		frame.setLocationRelativeTo(null);
