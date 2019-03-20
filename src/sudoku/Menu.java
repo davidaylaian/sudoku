@@ -200,9 +200,8 @@ public class Menu extends JPanel implements ActionListener
 					updateGenerate();
 					updateSolve();
 					b.setSelected(false);
-					int[][] a = new int[9][9];
-					Window.b.setBoardPanel(a);
-					Window.reset();
+					Cell[][] a = new Cell[9][9];
+					Window.getGameState().resetEmphasis();
 				}else {
 					a.setSelected(false);
 					b.setSelected(true);
@@ -218,7 +217,6 @@ public class Menu extends JPanel implements ActionListener
 			updateGenerate();
 			updateSolve();
 			a.setSelected(false);
-			Window.reset();
 		}
 
 		updateUndoRedo();
