@@ -147,7 +147,7 @@ public class Menu extends JPanel implements ActionListener
 
 			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
 		}
-
+		// Does not Work Todo
 		if(eventName.equals("gen")) {
 			new PopUp( "Generate a new puzzle (This puzzle will be lost)");
 			Puzzle.createPuzzle();
