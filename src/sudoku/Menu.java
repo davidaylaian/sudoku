@@ -190,9 +190,25 @@ public class Menu extends JPanel implements ActionListener
 		}
 
 		if(eventName.equals("entry")) {
-			// toggles the solving button (b) if it is selected already
-			Window.entryMode();
-			b.setSelected(false);
+			//toggles the solving button (b) if it is selected already
+			if(Window.mode) {
+				b.setSelected(false);
+				p = new PopUp( "Switching to Entry Mode will erase the current puzzle", "Ok", "Cancel");
+				if(p.getYesOrNo()) {
+					Window.mode = false;
+					updateHint();
+					updateGenerate();
+					updateSolve();
+					b.setSelected(false);
+					int[][] a = new int[9][9];
+					Window.b.setBoardPanel(a);
+					Window.reset();
+				}else {
+					a.setSelected(false);
+					b.setSelected(true);
+				}
+			}
+
 		}
 
 		if(eventName.equals("solving")) {
