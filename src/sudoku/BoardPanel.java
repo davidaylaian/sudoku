@@ -50,8 +50,6 @@ public class BoardPanel extends JPanel{
 
 	public void setBoardPanel(int[][] generatedBoard) {
 		setPreferredSize(new Dimension(648, 648));
-	//	g.setColor
-	//	this.drawRect(0,0,650,650);
 		this.setBackground(Color.white);
 		board = new Cell[9][9];
 		for(int r=0; r<9; r++) {
