@@ -45,12 +45,9 @@ public class GameState
 		return gameBoard;
 	}
 
-	// warning: will reset the history as well. probably should alert the user when calling this method
-	public void resetGameBoard(Cell[][] newGameBoard)
+	public void resetEmphasis()
 	{
-		gameBoard = newGameBoard;
-		history = new ArrayList<>();
-		historyIndex = 0;
+		// stub
 	}
 
 	public void setCell(Cell newCell, int row, int col)
