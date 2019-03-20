@@ -68,12 +68,10 @@ public class BoardPanel extends JPanel
 				state.getCell(r, c).draw(g, r, c);
 			}
 		}
-
 		drawGrid(g);
 	}
 
 	private void drawGrid(Graphics g) {
-
 		for(int x=0; x<648; x+=72) {
 			if(x%216==0) {
 				g.fillRect(x-2, 0, 5, 648);

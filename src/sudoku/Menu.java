@@ -2,16 +2,11 @@ package sudoku;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.WindowListener;
 import java.io.File;
-import java.io.IOException;
-
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -24,6 +19,7 @@ public class Menu extends JPanel implements ActionListener
 	private JRadioButton a,b;
 	private JLabel entry, solving;
 	private PopUp p;
+
 
 	public Menu()
 	{
@@ -121,39 +117,41 @@ public class Menu extends JPanel implements ActionListener
 		a.setSelected(true);
 	}
 
+
 	protected void updateUndoRedo() {
 		redo.setEnabled(Window.getGameState().redo_enabled());
 		undo.setEnabled(Window.getGameState().undo_enabled());
 	}
 
 	public void updateSolve() {
-		solve.setEnabled(Window.getMode());
+		solve.setEnabled(Window.mode);
 	}
 
 	public void updateHint() {
-		hint.setEnabled(Window.getMode());
+		hint.setEnabled(Window.mode);
 	}
 
 	public void updateGenerate() {
-		hint.setEnabled(!Window.getMode());
+		hint.setEnabled(!Window.mode);
 	}
-
-	@Override
+  
 	public void actionPerformed(ActionEvent e)
 	{
 		String eventName = e.getActionCommand();
 
 		if(eventName.equals("hint")) {
-			p = new PopUp( "Are you sure you want a hint?", "Yes", "No");
+			new PopUp( "Are you sure you want a hint?", "Yes", "No");
 		}
 
 		if(eventName.equals("solve")) {
-			p = new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
 
+			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
 		}
 
 		if(eventName.equals("gen")) {
-			p = new PopUp( "Generate a new puzzle (All previous progress will be lost)", "Ok", "Cancel");
+			new PopUp( "Generate a new puzzle (This puzzle will be lost)");
+			Puzzle.createPuzzle();
+
 		}
 
 		if(eventName.equals("save")) {
@@ -161,7 +159,7 @@ public class Menu extends JPanel implements ActionListener
 			fileChooser.showSaveDialog(null);
 			File f = fileChooser.getSelectedFile();
 			try {
-				Window.getGameState().save(f);
+				//Window.getGameState().save(f);
 			} catch (Exception E) {
 				if (f != null)
 					new PopUp("Could not save file.", "Okay", "");
@@ -169,6 +167,7 @@ public class Menu extends JPanel implements ActionListener
 		}
 
 		if(eventName.equals("redo")) {
+
 			Window.getGameState().redo();
 			Window.repaintBoard();
 		}
@@ -183,7 +182,7 @@ public class Menu extends JPanel implements ActionListener
 			fileChooser.showOpenDialog(null);
 			File f = fileChooser.getSelectedFile();
 			try {
-				Window.setGameState(GameState.load(f));
+				//Window.setGameState(GameState.load(f));
 			} catch (Exception E) {
 				if (f != null)
 					new PopUp("Could not load file.", "Okay", "");
@@ -198,8 +197,12 @@ public class Menu extends JPanel implements ActionListener
 
 		if(eventName.equals("solving")) {
 			//toggles the entry button (a) if it is selected already
-			Window.solvingMode();
+			Window.mode = true;
+			updateHint();
+			updateGenerate();
+			updateSolve();
 			a.setSelected(false);
+			Window.reset();
 		}
 
 		updateUndoRedo();

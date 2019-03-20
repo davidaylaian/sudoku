@@ -53,8 +53,8 @@ public class Cell {
 
 	public Cell(int state) {
 		this.state = state;
-
 	}
+  
 	private void setState() {
 		for(int i=0;i<3;i++) {
 			for(int j=0;j<3;j++) {
@@ -64,6 +64,7 @@ public class Cell {
 			}
 		}
 	}
+  
 	public void click(int r, int c, boolean solvingMode) {
 		if(solvingMode) {
 			if(state!=0) {
@@ -94,6 +95,7 @@ public class Cell {
 			}
 		}
 	}
+  
 	public void draw(Graphics g, int row, int col) {
 		Font f = new Font("Roboto", Font.PLAIN, 30);
 		g.setFont(f);

@@ -63,6 +63,7 @@ public class GameState
 		history.add(c);
 		historyIndex++;
 
+
 		gameBoard[row][col] = newCell;
   }
 

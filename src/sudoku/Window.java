@@ -1,22 +1,24 @@
 package sudoku;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Window
 {
+
 	private static JFrame frame;
 	private static JPanel contentPane;
 	private static GameState gs;
 	private static Menu menu;
 	private static BoardPanel board;
 
+	private static GameState game;
+	static BoardPanel b = new BoardPanel();
 	// true = solving, entry = false
-	public static boolean mode;
+	static boolean mode;
+
+
 
 	public static boolean getMode() {
 		return mode;
@@ -63,11 +65,10 @@ public class Window
 
 		frame.setVisible(true);
 		frame.pack();
-
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((int) ((screen.width/2) - (frame.size().getWidth()/2)), (int) ((screen.height/2) - (frame.size().getHeight()/2)));
+		
+//		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+//		frame.setLocation((int) ((screen.width/2) - (frame.size().getWidth()/2)), (int) ((screen.height/2) - (frame.size().getHeight()/2)));
 		frame.setLocationRelativeTo(null);
-
 		entryMode();
 		menu.updateUndoRedo();
 		menu.updateHint();

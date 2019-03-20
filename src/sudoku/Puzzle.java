@@ -68,6 +68,7 @@ public class Puzzle {
 				board[row][col] = 0;
 			}
 		}
+		
 		return board;
 	}
 	private static boolean solveBoard(int[][] board) {
@@ -134,5 +135,13 @@ public class Puzzle {
 			}
 		}
 		return false;
+	}
+	public static void print(int[][] board) {
+		for(int r=0;r<9;r++) {
+			for(int c=0;c<9;c++) {
+				System.out.print(board[r][c]);
+			}
+			System.out.println();
+		}
 	}
 }
