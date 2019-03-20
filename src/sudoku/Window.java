@@ -49,6 +49,11 @@ public class Window
 	{
 		board.repaint();
 	}
+	
+	public static void reset() {
+		b.reset();
+		b.repaint();
+	}
 
 	public Window()
 	{
