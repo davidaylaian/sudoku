@@ -6,8 +6,12 @@ import javax.swing.JPanel;
 
 public class Window
 {
-	JFrame frame;
-	JPanel contentPane;
+
+	private static JFrame frame;
+	private static JPanel contentPane;
+	private static GameState gs;
+	private static Menu menu;
+	private static BoardPanel board;
 
 	private static GameState game;
 	static BoardPanel b = new BoardPanel();
@@ -15,17 +19,37 @@ public class Window
 	static boolean mode;
 
 
-	public static GameState getGameState() {
-		return game;
+
+	public static boolean getMode() {
+		return mode;
 	}
 
-	public static void setGameState(GameState g) {
-		game = g;
+	public static void entryMode() {
+		mode = false;
 	}
-	public static void reset() {
-		b.reset();
-		b.repaint();
+
+	public static void solvingMode() {
+		mode = true;
 	}
+
+	public static GameState getGameState() {
+		return gs;
+	}
+
+	public static void setGameState(GameState newState) {
+		gs = newState;
+	}
+
+	public static void passUpdateUndoRedo()
+	{
+		menu.updateUndoRedo();
+	}
+
+	public static void repaintBoard()
+	{
+		board.repaint();
+	}
+
 	public Window()
 	{
 		frame = new JFrame("Sudoku");
@@ -34,10 +58,10 @@ public class Window
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		frame.setContentPane(contentPane);
 
-		Menu menu = new Menu();
+		menu = new Menu();
+		board = new BoardPanel();
 		contentPane.add(menu);
-
-		contentPane.add(b);
+		contentPane.add(board);
 
 		frame.setVisible(true);
 		frame.pack();
@@ -45,11 +69,7 @@ public class Window
 //		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 //		frame.setLocation((int) ((screen.width/2) - (frame.size().getWidth()/2)), (int) ((screen.height/2) - (frame.size().getHeight()/2)));
 		frame.setLocationRelativeTo(null);
-
-
-		GameState state = new GameState(null);
-		setGameState(state);
-
+		entryMode();
 		menu.updateUndoRedo();
 		menu.updateHint();
 		menu.updateGenerate();

@@ -117,31 +117,24 @@ public class Menu extends JPanel implements ActionListener
 		a.setSelected(true);
 	}
 
-	protected void updateUndoRedo()
-	{
-		//redo.setEnabled(Window.getGameState().redo_enabled());
-		//undo.setEnabled(Window.getGameState().undo_enabled());
+
+	protected void updateUndoRedo() {
+		redo.setEnabled(Window.getGameState().redo_enabled());
+		undo.setEnabled(Window.getGameState().undo_enabled());
 	}
 
 	public void updateSolve() {
 		solve.setEnabled(Window.mode);
 	}
+
 	public void updateHint() {
 		hint.setEnabled(Window.mode);
 	}
+
 	public void updateGenerate() {
 		hint.setEnabled(!Window.mode);
 	}
-	//	public void updateSolve() {
-	//		solve.setEnabled(Window.getMode());
-	//	}
-	//	public void updateHint() {
-	//		hint.setEnabled(Window.getMode());
-	//	}
-	//	public void updateGenerate() {
-	//		gen.setEnabled(!(Window.getMode()));
-	//	}
-
+  
 	public void actionPerformed(ActionEvent e)
 	{
 		String eventName = e.getActionCommand();
@@ -174,13 +167,14 @@ public class Menu extends JPanel implements ActionListener
 		}
 
 		if(eventName.equals("redo")) {
-			//Window.getGameState().redo();
-			updateUndoRedo();
+
+			Window.getGameState().redo();
+			Window.repaintBoard();
 		}
 
 		if(eventName.equals("undo")) {
-			//Window.getGameState().undo();
-			updateUndoRedo();
+			Window.getGameState().undo();
+			Window.repaintBoard();
 		}
 
 		if(eventName.equals("open")) {
@@ -196,29 +190,9 @@ public class Menu extends JPanel implements ActionListener
 		}
 
 		if(eventName.equals("entry")) {
-			//toggles the solving button (b) if it is selected already
-
-			if(Window.getMode()) {
-				b.setSelected(false);
-				p = new PopUp( "Switching to Entry Mode will erase the current puzzle", "Ok", "Cancel");
-				if(p.getYesOrNo()) {
-					Window.mode = false;
-					updateHint();
-					updateGenerate();
-					updateSolve();
-					b.setSelected(false);
-				}else {
-					a.setSelected(false);
-					b.setSelected(true);
-				}
-			}else {
-				Window.mode = false;
-				updateHint();
-				updateGenerate();
-				updateSolve();
-				b.setSelected(false);
-			}
-
+			// toggles the solving button (b) if it is selected already
+			Window.entryMode();
+			b.setSelected(false);
 		}
 
 		if(eventName.equals("solving")) {
@@ -230,7 +204,7 @@ public class Menu extends JPanel implements ActionListener
 			a.setSelected(false);
 			Window.reset();
 		}
+
+		updateUndoRedo();
 	}
 }
-
-

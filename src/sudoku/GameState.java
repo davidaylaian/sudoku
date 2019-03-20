@@ -28,7 +28,7 @@ public class GameState
 	{
 		solution = newSolution;
 		history = new ArrayList<>();
-		historyIndex = 0;
+		historyIndex = -1;
 		gameBoard = new Cell[9][9];
 
 		for (int x = 0; x < 9; x++)
@@ -53,17 +53,19 @@ public class GameState
 		historyIndex = 0;
 	}
 
-	public void setCell(Cell newCell, int indexX, int indexY)
+	public void setCell(Cell newCell, int row, int col)
 	{
 		Change c = new Change();
-		c.indexX = indexX;
-		c.indexY = indexY;
-		c.modifiedCell = gameBoard[indexX][indexY];
+		c.indexX = row;
+		c.indexY = col;
+		c.modifiedCell = gameBoard[row][col];
+
 		history.add(c);
 		historyIndex++;
 
-		gameBoard[indexX][indexY] = newCell;
-	}
+
+		gameBoard[row][col] = newCell;
+  }
 
 	public Cell getCell(int indexX, int indexY)
 	{
@@ -89,19 +91,19 @@ public class GameState
 
 	public void redo()
 	{
-		Change c = history.get(historyIndex);
+		Change c = history.get(historyIndex + 1);
 		gameBoard[c.indexX][c.indexY] = c.modifiedCell;
 		historyIndex++;
 	}
 
 	public boolean undo_enabled()
 	{
-		return historyIndex != 0;
+		return historyIndex >= 0;
 	}
 
 	public boolean redo_enabled()
 	{
-		return historyIndex == history.size() - 1;
+		return historyIndex < history.size() - 1;
 	}
 
 	public void save(File f) throws Exception
