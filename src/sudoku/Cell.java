@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class Cell implements Cloneable {
+public class Cell {
 	static int cellSide = 72;
 	private int state;
-	public boolean[][] emphasis = new boolean[3][3];
+	private boolean[][] emphasis = new boolean[3][3];
 	private int count;
 	//private boolean changeable;
 
@@ -22,15 +22,21 @@ public class Cell implements Cloneable {
 		resetEmphasis();
 	}
 
-	public Object clone() throws CloneNotSupportedException {
-return super.clone();
-	}
-
 	public Cell makeCopy() {
 		Cell copy = new Cell();
-		copy.state		= this.state;
-		copy.emphasis	= this.emphasis;
-		copy.count		= this.count;
+		copy.state = this.state;
+		boolean[][] newemphasis = new boolean[3][3];
+
+		for (int x = 0; x < 3; x++)
+		{
+			for (int y = 0; y < 3; y++)
+			{
+				newemphasis[x][y] = emphasis[x][y];
+			}
+		}
+
+		copy.emphasis = newemphasis;
+		copy.count = this.count;
 		return copy;
 	}
 

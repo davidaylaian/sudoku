@@ -21,26 +21,25 @@ public class BoardPanel extends JPanel
 			public void mouseClicked(MouseEvent e) {}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}
-			public void mousePressed(MouseEvent e) {}
 
-			public void mouseReleased(MouseEvent e) {
+			public void mousePressed(MouseEvent e)
+			{
+				int colOfCell = e.getX()/Cell.cellSide;
+				int rowOfCell = e.getY()/Cell.cellSide;
 
-				int col = e.getX()/Cell.cellSide;
-				int row = e.getY()/Cell.cellSide;
-
-				int c = e.getX()/(Cell.cellSide/3);
-				int r = e.getY()/(Cell.cellSide/3);
+				int colInside = e.getX()/(Cell.cellSide/3);
+				int rowInside = e.getY()/(Cell.cellSide/3);
 
 				GameState state = Window.getGameState();
-
-				Cell copy = state.getCell(row, col).makeCopy();
-				copy.click(r-(row*3), c-(col*3), true);
-				state.setCell(copy, row, col);
-				System.out.println(copy);
+				Cell copy = state.getCell(rowOfCell, colOfCell).makeCopy();
+				copy.click(rowInside-(rowOfCell*3), colInside-(colOfCell*3), true);
+				state.setCell(copy, rowOfCell, colOfCell);
 
 				Window.passUpdateUndoRedo();
 				repaint();
 			}
+
+			public void mouseReleased(MouseEvent e) {}
 		});
 	}
 
@@ -91,13 +90,4 @@ public class BoardPanel extends JPanel
 			}
 		}
 	}
-
-	/*
-	public static void main(String[] str) {
-		JFrame frame = new JFrame("Test");
-		BoardPanel b = new BoardPanel();
-		frame.setContentPane(b);
-		frame.pack();
-		frame.setVisible(true);
-	}*/
 }
