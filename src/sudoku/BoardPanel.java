@@ -1,4 +1,3 @@
-
 package sudoku;
 
 import java.awt.Color;
@@ -48,7 +47,28 @@ public class BoardPanel extends JPanel{
 			}				
 		});
 	}
-  
+
+	public void setBoardPanel(int[][] generatedBoard) {
+		setPreferredSize(new Dimension(648, 648));
+	//	g.setColor
+	//	this.drawRect(0,0,650,650);
+		this.setBackground(Color.white);
+		board = new Cell[9][9];
+		for(int r=0; r<9; r++) {
+			for(int c=0; c<9; c++) {
+				if(generatedBoard[r][c]==0) {
+					board[r][c] = new Cell();
+				}else {
+					board[r][c] = new Cell(generatedBoard[r][c]);
+				}
+			}
+		}
+		
+		
+	}
+
+	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		for(int r=0; r<9; r++) {
@@ -83,4 +103,3 @@ public class BoardPanel extends JPanel{
 		}
 	}
 }
-
