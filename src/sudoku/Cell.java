@@ -42,7 +42,7 @@ public class Cell {
 
 
 
-	private void resetEmphasis() {
+	public void resetEmphasis() {
 		for(int r=0;r<3;r++) {
 			for(int c=0;c<3;c++) {
 				emphasis[r][c] = true;

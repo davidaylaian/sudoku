@@ -47,7 +47,13 @@ public class GameState
 
 	public void resetEmphasis()
 	{
-		// stub
+		for (int x = 0; x < 9; x++)
+		{
+			for (int y = 0; y < 9; y++)
+			{
+				gameBoard[x][y].resetEmphasis();
+			}
+		}
 	}
 
 	public void setCell(Cell newCell, int row, int col)
