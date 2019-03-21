@@ -71,6 +71,7 @@ public class Window
 
 		frame.setVisible(true);
 		frame.pack();
+		frame.setResizable(false);
 
 //		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 //		frame.setLocation((int) ((screen.width/2) - (frame.size().getWidth()/2)), (int) ((screen.height/2) - (frame.size().getHeight()/2)));
