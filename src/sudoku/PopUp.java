@@ -20,7 +20,7 @@ public class PopUp implements ActionListener{
 	JPanel contentPane;
 	JButton upValButton;
 	JButton downValButton;
-	JLabel valueDisplay;
+	JLabel valueDisplay, hintLabel, emptyLabel;
 	JLabel epic;
 	JButton OK, Cancel;
 	private int answer = 0;
@@ -67,17 +67,23 @@ public class PopUp implements ActionListener{
 	{
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frame = new JFrame("Answer Before Proceeding");
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		/* Create a content pane with a BoxLayout and empty borders*/
 		contentPane = new JPanel();
 		contentPane.setBorder(BorderFactory.createEmptyBorder(10, 100, 10, 100));
 		contentPane.setBackground(Color.white);
-		contentPane.setLayout(new GridLayout(3, 2, 10, 5));
+		contentPane.setLayout(new GridLayout(4, 2, 10, 5));
 
 		/* Create a query Label */
 		epic = new JLabel(query);
 		contentPane.add(epic);
+		
+		emptyLabel = new JLabel("");
+		contentPane.add(emptyLabel);
+		
+		hintLabel = new JLabel("Hints: ");
+		contentPane.add(hintLabel);
 		
 		/*Create a Value Display Label */
 		valueDisplay = new JLabel("0");
@@ -115,6 +121,14 @@ public class PopUp implements ActionListener{
 		/* Add content pane to frame */
 		frame.setContentPane(contentPane);
 		
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		  
+		    public void windowClosing(java.awt.event.WindowEvent newWindowEvent) {
+		        newWindowEvent.getWindow().dispose();
+		        hints = -1;
+		    }
+		});
+		
 		/* Size and then display the frame. */
 		frame.pack();
 		frame.setLocation((int) ((screen.width/2) - (frame.size().getWidth()/2)), (int) ((screen.height/2) - (frame.size().getHeight()/2)));
@@ -145,6 +159,6 @@ public class PopUp implements ActionListener{
 		}else {
 			frame.setVisible(false);
 		}
-		
 	}
+	
 }
