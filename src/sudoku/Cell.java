@@ -64,6 +64,10 @@ public class Cell {
 			}
 		}
 	}
+	
+	private int getState() {
+		return state;
+	}
   
 	public void click(int r, int c, boolean solvingMode) {
 		if(solvingMode) {
