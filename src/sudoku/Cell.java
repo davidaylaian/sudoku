@@ -11,12 +11,6 @@ public class Cell {
 	private int count;
 	//private boolean changeable;
 
-	private static final int[][] nums = {
-			{1,2,3},
-			{4,5,6},
-			{7,8,9}
-	};
-
 	public Cell() {
 		state = 0;
 		resetEmphasis();
@@ -54,21 +48,21 @@ public class Cell {
 	public Cell(int state) {
 		this.state = state;
 	}
-  
+
 	private void setState() {
-		for(int i=0;i<3;i++) {
-			for(int j=0;j<3;j++) {
+		for(int i = 0; i < 3;) {
+			for(int j = 0; j < 3;) {
 				if(emphasis[i][j]) {
-					state = nums[i][j];
+					state = ++i + ++j * 3;
 				}
 			}
 		}
 	}
-	
-	private int getState() {
+
+	public int getState() {
 		return state;
 	}
-  
+
 	public void click(int r, int c, boolean solvingMode) {
 		if(solvingMode) {
 			if(state!=0) {
@@ -95,11 +89,11 @@ public class Cell {
 			if(state!=0) {
 				state = 0;
 			} else {
-				state = nums[r][c];
+				state = c + r*3 + 1;
 			}
 		}
 	}
-  
+
 	public void draw(Graphics g, int row, int col) {
 		Font f = new Font("Roboto", Font.PLAIN, 30);
 		g.setFont(f);
@@ -120,7 +114,7 @@ public class Cell {
 					}
 					g.fillRect(col*cellSide+cellSide*c/3, row*cellSide+cellSide*r/3,cellSide/3, cellSide/3);
 					g.setColor(Color.black);
-					g.drawString("" + nums[r][c], col*cellSide+cellSide*c/3+width/2+4, row*cellSide+cellSide*r/3+height/2+8);
+					g.drawString("" + (c + r*3 + 1), col*cellSide+cellSide*c/3+width/2+4, row*cellSide+cellSide*r/3+height/2+8);
 					drawLines(g, row, col);
 				}
 			}
