@@ -65,7 +65,7 @@ public class Cell {
 		}
 	}
 	
-	private int getState() {
+	public int getState() {
 		return state;
 	}
   
