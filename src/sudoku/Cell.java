@@ -122,19 +122,4 @@ public class Cell {
 			g.drawString(""+state, col*cellSide+width/2+16, row*cellSide+height/2+30);
 		}
 	}
-
-	private void drawLines(Graphics g, int r, int c) {
-		for(int row=1;row<=2;row++) {
-			int x1 = c*cellSide;
-			int x2 = (c+1)*cellSide;
-			int y = r*cellSide+cellSide*row/3;
-			g.drawLine(x1, y, x2, y);
-		}
-		for(int col=1;col<=2;col++) {
-			int x = c*cellSide+cellSide*col/3;
-			int y1 = r*cellSide;
-			int y2 = (r+1)*cellSide;
-			g.drawLine(x, y1, x, y2);
-		}
-	}
 }

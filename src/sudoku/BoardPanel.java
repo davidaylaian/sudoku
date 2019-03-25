@@ -11,7 +11,6 @@ import java.awt.color.*;
 
 public class BoardPanel extends JPanel 
 {
-	final static Color light = new Color(170,170,170);
 	final Color dark = new Color(85,85,85);
 	final Color darker = new Color(0,0,0);
 	
@@ -72,12 +71,9 @@ public class BoardPanel extends JPanel
 		for(int x=0; x<648; x+=72) {
 			if(x%216==0) {
 				g.setColor(darker);
-			//	g.drawLine(x, 0, x, 648);
-				g.fillRect(x-2, 0, 2, 648);
-				
+				g.fillRect(x-2, 0, 2, 648);				
 			}else {
 				g.setColor(dark);
-				//g.drawLine(x, 0, x, 648);
 				g.fillRect(x-1, 0, 1, 648);
 			}
 		}
@@ -85,11 +81,9 @@ public class BoardPanel extends JPanel
 		for(int y=0; y<648; y+=72) {
 			if(y%216==0) {
 				g.setColor(darker);
-			//	g.drawLine(0, y, 648, y);
 				g.fillRect(0, y-2, 648, 2);
 			}else {
 				g.setColor(dark);
-			//	g.drawLine(0, y, 648, y);
 				g.fillRect(0, y-1, 648, 1);
 			}
 		}
