@@ -1,8 +1,7 @@
 package sudoku;
 
 import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Stack;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 
@@ -16,19 +15,29 @@ public class GameState
 		Cell modifiedCell;
 		int indexX;
 		int indexY;
+		
+		Change(Cell mod, int x, int y)
+		{
+			modifiedCell = mod;
+			indexX = x;
+			indexY = y;
+		}
 	}
 
-	private List<Change> history;
-	private int historyIndex;
+	private Stack<Change> history_undo;
+	private Stack<Change> history_redo;
 
-	//for XML conventions
-	public GameState() {}
+	// for XML conventions; do not use
+	public GameState()
+	{
+		System.out.println("Warning: Please use the other GameState constructor");
+	}
 
 	public GameState(int[][] newSolution)
 	{
 		solution = newSolution;
-		history = new ArrayList<>();
-		historyIndex = -1;
+		history_undo = new Stack<>();
+		history_redo = new Stack<>();
 		gameBoard = new Cell[9][9];
 
 		for (int x = 0; x < 9; x++)
@@ -47,20 +56,23 @@ public class GameState
 
 	public void resetEmphasis()
 	{
-		// stub
+		for (int x = 0; x < 9; x++)
+		{
+			for (int y = 0; y < 9; y++)
+			{
+				gameBoard[x][y].resetEmphasis();
+			}
+		}
 	}
 
 	public void setCell(Cell newCell, int row, int col)
 	{
-		Change c = new Change();
-		c.indexX = row;
-		c.indexY = col;
-		c.modifiedCell = gameBoard[row][col];
-
-		history.add(c);
-		historyIndex++;
-
-
+		Change c = new Change(
+			gameBoard[row][col], row, col
+		);
+		
+		history_undo.push(c);
+		history_redo.clear();
 		gameBoard[row][col] = newCell;
   }
 
@@ -81,26 +93,36 @@ public class GameState
 
 	public void undo()
 	{
-		Change c = history.get(historyIndex);
+		Change c = history_undo.pop();
+		Change redo = new Change(
+			gameBoard[c.indexX][c.indexY],
+			c.indexX, c.indexY
+		);
+		
+		history_redo.push(redo);
 		gameBoard[c.indexX][c.indexY] = c.modifiedCell;
-		historyIndex--;
 	}
 
 	public void redo()
 	{
-		Change c = history.get(historyIndex + 1);
+		Change c = history_redo.pop();
+		Change undo = new Change(
+			gameBoard[c.indexX][c.indexY],
+			c.indexX, c.indexY
+		);
+		
+		history_undo.push(undo);
 		gameBoard[c.indexX][c.indexY] = c.modifiedCell;
-		historyIndex++;
 	}
 
 	public boolean undo_enabled()
 	{
-		return historyIndex >= 0;
+		return !history_undo.isEmpty();
 	}
 
 	public boolean redo_enabled()
 	{
-		return historyIndex < history.size() - 1;
+		return !history_redo.isEmpty();
 	}
 
 	public void save(File f) throws Exception

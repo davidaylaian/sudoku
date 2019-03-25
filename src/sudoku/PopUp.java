@@ -75,7 +75,7 @@ public class PopUp implements ActionListener{
 		
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frame = new JFrame("Answer Before Proceeding");
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(BorderFactory.createEmptyBorder(10, 100, 10, 100));
@@ -85,7 +85,6 @@ public class PopUp implements ActionListener{
 		epic = new JLabel(queryStore);
 		contentPane.add(epic);
 		
-
 		valueDisplay = new JLabel("0");
 		contentPane.add(valueDisplay);
 		
@@ -126,7 +125,7 @@ public class PopUp implements ActionListener{
 		loadingLabel = new JLabel("The Puzzle is Loading...");
 		loadingPane.add(loadingLabel);
 		frame.setContentPane(loadingPane);
-		
+	
 		frame.pack();
 		
 		frame.setLocation((int) ((screen.width/2) - (frame.size().getWidth()/2)), (int) ((screen.height/2) - (frame.size().getHeight()/2)));
@@ -167,6 +166,6 @@ public class PopUp implements ActionListener{
 		}else {
 			frame.setVisible(false);
 		}
-		
 	}
+	
 }
