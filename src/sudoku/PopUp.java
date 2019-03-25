@@ -2,6 +2,7 @@ package sudoku;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -18,14 +19,19 @@ public class PopUp implements ActionListener{
 	
 	JFrame frame;
 	JPanel contentPane;
+	JPanel loadingPane;
+	
 	JButton upValButton;
 	JButton downValButton;
-	JLabel valueDisplay, hintLabel, emptyLabel;
-	JLabel epic;
 	JButton OK, Cancel;
+	
+	JLabel valueDisplay;
+	JLabel epic, loadingLabel;
+	
 	private int answer = 0;
 	boolean yesnt;
 	private int hints = 0;
+	private String queryStore;
 	
 	// enter "" for noAnswer to not have a no option
 	PopUp(String query, String yesAnswer, String noAnswer) {
@@ -62,34 +68,26 @@ public class PopUp implements ActionListener{
 		yesnt = answer == JOptionPane.YES_OPTION;
 	}
 
-	//use this constructor for getting hints wanted
+	//use this constructor for getting hints wanted (generate button)
 	PopUp(String query)
 	{
+		queryStore = query;
+		
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frame = new JFrame("Answer Before Proceeding");
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
-		/* Create a content pane with a BoxLayout and empty borders*/
 		contentPane = new JPanel();
 		contentPane.setBorder(BorderFactory.createEmptyBorder(10, 100, 10, 100));
 		contentPane.setBackground(Color.white);
-		contentPane.setLayout(new GridLayout(4, 2, 10, 5));
-
-		/* Create a query Label */
-		epic = new JLabel(query);
+		contentPane.setLayout(new GridLayout(3, 2, 10, 5));
+		
+		epic = new JLabel(queryStore);
 		contentPane.add(epic);
 		
-		emptyLabel = new JLabel("");
-		contentPane.add(emptyLabel);
-		
-		hintLabel = new JLabel("Hints: ");
-		contentPane.add(hintLabel);
-		
-		/*Create a Value Display Label */
 		valueDisplay = new JLabel("0");
 		contentPane.add(valueDisplay);
 		
-		/*Create a down Val button */
 		downValButton = new JButton("-1");
 		downValButton.setActionCommand("-1");
 		
@@ -98,7 +96,6 @@ public class PopUp implements ActionListener{
 		downValButton.setBackground(Color.WHITE);
 		contentPane.add(downValButton);
 		
-		/* Create a up Val button */
 		upValButton = new JButton("+1");
 		upValButton.setActionCommand("+1");
 		upValButton.setAlignmentX(JButton.LEFT_ALIGNMENT);
@@ -106,33 +103,43 @@ public class PopUp implements ActionListener{
 		upValButton.setBackground(Color.WHITE);
 		contentPane.add(upValButton);
 		
-		/* Create an OK button */
 		OK = new JButton("OK");
 		OK.addActionListener(this);
 		OK.setActionCommand("OK");
 		contentPane.add(OK);
 		
-		/*Create a cancel button */ 
 		Cancel = new JButton("Cancel");
 		Cancel.addActionListener(this);
 		Cancel.setActionCommand("cancel");
 		contentPane.add(Cancel);
 		
-		/* Add content pane to frame */
 		frame.setContentPane(contentPane);
+		frame.pack();
+		int frameHeight=contentPane.getHeight();
+		int frameWidth=contentPane.getWidth();
 		
-		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-		  
-		    public void windowClosing(java.awt.event.WindowEvent newWindowEvent) {
-		        newWindowEvent.getWindow().dispose();
-		        hints = -1;
-		    }
-		});
+		loadingPane = new JPanel();
+		loadingPane.setBackground(Color.WHITE);
+		loadingPane.setPreferredSize(new Dimension(frameWidth,frameHeight));
+		loadingPane.setLayout(new GridBagLayout());
+		loadingLabel = new JLabel("The Puzzle is Loading...");
+		loadingPane.add(loadingLabel);
+		frame.setContentPane(loadingPane);
+	
+		frame.pack();
 		
-		/* Size and then display the frame. */
+		frame.setLocation((int) ((screen.width/2) - (frame.size().getWidth()/2)), (int) ((screen.height/2) - (frame.size().getHeight()/2)));
+	
+		frame.setVisible(true);
+		
+	
+	}
+	
+	public void doneLoading() {
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setContentPane(contentPane);
 		frame.pack();
 		frame.setLocation((int) ((screen.width/2) - (frame.size().getWidth()/2)), (int) ((screen.height/2) - (frame.size().getHeight()/2)));
-		frame.setVisible(true);
 	}
 	
 	public boolean getYesOrNo() {
