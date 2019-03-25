@@ -54,7 +54,6 @@ public class Cell {
 			for(int j = 0; j < 3; j++) {
 				if(emphasis[i][j]) {
 					state = j + i * 3 + 1;
-
 				}
 			}
 		}
