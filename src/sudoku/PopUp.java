@@ -1,6 +1,5 @@
 package sudoku;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
@@ -8,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -170,16 +168,5 @@ public class PopUp implements ActionListener{
 			frame.setVisible(false);
 		}
 		
-	}
-
-	public static void main(String[] args) {
-		PopUp x = new PopUp("query is here boys");
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		x.doneLoading();
 	}
 }
