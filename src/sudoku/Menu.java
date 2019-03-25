@@ -140,12 +140,12 @@ public class Menu extends JPanel implements ActionListener
 		String eventName = e.getActionCommand();
 
 		if(eventName.equals("hint")) {
-			new PopUp( "Are you sure you want a hint?", "Yes", "No");
+			new PopUp( "Are you sure you want a hint?", "Yes", "No", false);
 		}
 
 		if(eventName.equals("solve")) {
 
-			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No");
+			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No", false);
 		}
 		// Does not Work Todo
 		if(eventName.equals("gen")) {
@@ -162,7 +162,7 @@ public class Menu extends JPanel implements ActionListener
 				//Window.getGameState().save(f);
 			} catch (Exception E) {
 				if (f != null)
-					new PopUp("Could not save file.", "Okay", "");
+					new PopUp("Could not save file.", "Okay", "", true);
 			}
 		}
 
@@ -185,7 +185,7 @@ public class Menu extends JPanel implements ActionListener
 				//Window.setGameState(GameState.load(f));
 			} catch (Exception E) {
 				if (f != null)
-					new PopUp("Could not load file.", "Okay", "");
+					new PopUp("Could not load file.", "Okay", "", true);
 			}
 		}
 
@@ -193,7 +193,7 @@ public class Menu extends JPanel implements ActionListener
 			//toggles the solving button (b) if it is selected already
 			if(Window.mode) {
 				b.setSelected(false);
-				p = new PopUp( "Switching to Entry Mode will erase the current puzzle", "Ok", "Cancel");
+				p = new PopUp( "Switching to Entry Mode will erase the current puzzle", "Ok", "Cancel", true);
 				if(p.getYesOrNo()) {
 					Window.mode = false;
 					updateHint();

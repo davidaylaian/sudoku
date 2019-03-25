@@ -34,22 +34,36 @@ public class PopUp implements ActionListener{
 	private String queryStore;
 	
 	// enter "" for noAnswer to not have a no option
-	PopUp(String query, String yesAnswer, String noAnswer) {
+	//if message has ok/cancel and is a warning instead of a question, set warning to true
+	PopUp(String query, String yesAnswer, String noAnswer, boolean warning) {
 		String[] options;
 		if(!noAnswer.equals("")) {
 			options = new String[2];
 			options[0] = yesAnswer;
 			options[1] = noAnswer;
-			answer = JOptionPane.showOptionDialog(
-					frame,
-					query,
-					"Please Answer Before Proceeding",
-					JOptionPane.YES_NO_OPTION,
-					JOptionPane.QUESTION_MESSAGE,
-					null,
-					options,
-					options[0]
-			);
+			if(warning) {
+				answer = JOptionPane.showOptionDialog(
+						frame,
+						query,
+						"Please Answer Before Proceeding",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE,
+						null,
+						options,
+						options[0]
+				);
+			}else {
+				answer = JOptionPane.showOptionDialog(
+						frame,
+						query,
+						"Please Answer Before Proceeding",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						options,
+						options[0]
+				);
+			}
 		}else {
 			options = new String[1];
 			options[0] = yesAnswer;
