@@ -50,10 +50,11 @@ public class Cell {
 	}
 
 	private void setState() {
-		for(int i = 0; i < 3;) {
-			for(int j = 0; j < 3;) {
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
 				if(emphasis[i][j]) {
-					state = ++i + ++j * 3;
+					state = j + i * 3 + 1;
+
 				}
 			}
 		}
