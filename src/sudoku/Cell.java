@@ -114,8 +114,7 @@ public class Cell {
 					}
 					g.fillRect(col*cellSide+cellSide*c/3, row*cellSide+cellSide*r/3,cellSide/3, cellSide/3);
 					g.setColor(Color.black);
-					g.drawString("" + (c + r*3 + 1), col*cellSide+cellSide*c/3+width/2+4, row*cellSide+cellSide*r/3+height/2+8);
-					drawLines(g, row, col);
+					g.drawString("" + nums[r][c], col*cellSide+cellSide*c/3+width/2+4, row*cellSide+cellSide*r/3+height/2+8);
 				}
 			}
 		} else {

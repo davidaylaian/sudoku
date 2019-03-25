@@ -9,8 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.color.*;
 
-public class BoardPanel extends JPanel
+public class BoardPanel extends JPanel 
 {
+	final static Color light = new Color(170,170,170);
+	final Color dark = new Color(85,85,85);
+	final Color darker = new Color(0,0,0);
+	
 	BoardPanel()
 	{
 		Window.setGameState(new GameState(null));
@@ -19,9 +23,11 @@ public class BoardPanel extends JPanel
 
 	private void setup()
 	{
-		setPreferredSize(new Dimension(648, 648));
+		
+		setPreferredSize(new Dimension(638, 648));
 		this.setBackground(Color.white);
 
+		
 		this.addMouseListener(new MouseListener()
 		{
 			public void mouseClicked(MouseEvent e) {}
@@ -49,11 +55,6 @@ public class BoardPanel extends JPanel
 		});
 	}
 
-	public void repaint()
-	{
-		super.repaint();
-	}
-
 	public void paintComponent(Graphics g)
 	{
 		GameState state = Window.getGameState();
@@ -70,17 +71,26 @@ public class BoardPanel extends JPanel
 	private void drawGrid(Graphics g) {
 		for(int x=0; x<648; x+=72) {
 			if(x%216==0) {
-				g.fillRect(x-2, 0, 5, 648);
+				g.setColor(darker);
+			//	g.drawLine(x, 0, x, 648);
+				g.fillRect(x-2, 0, 2, 648);
+				
 			}else {
-				g.fillRect(x-1, 0, 3, 648);
+				g.setColor(dark);
+				//g.drawLine(x, 0, x, 648);
+				g.fillRect(x-1, 0, 1, 648);
 			}
 		}
 
 		for(int y=0; y<648; y+=72) {
 			if(y%216==0) {
-				g.fillRect(0, y-2, 648, 5);
+				g.setColor(darker);
+			//	g.drawLine(0, y, 648, y);
+				g.fillRect(0, y-2, 648, 2);
 			}else {
-				g.fillRect(0, y-1, 648, 3);
+				g.setColor(dark);
+			//	g.drawLine(0, y, 648, y);
+				g.fillRect(0, y-1, 648, 1);
 			}
 		}
 	}
