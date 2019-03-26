@@ -89,7 +89,7 @@ public class PopUp implements ActionListener{
 		
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frame = new JFrame("Answer Before Proceeding");
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(BorderFactory.createEmptyBorder(10, 100, 10, 100));
