@@ -13,12 +13,8 @@ public class Window
 	private static Menu menu;
 	private static BoardPanel board;
 
-	private static GameState game;
-	static BoardPanel b = new BoardPanel();
 	// true = solving, entry = false
 	static boolean mode;
-
-
 
 	public static boolean getMode() {
 		return mode;
@@ -50,10 +46,10 @@ public class Window
 		board.repaint();
 	}
 
-	public static void resetEmphasis() {
-
-		game.resetEmphasis();
-		b.repaint();
+	public static void resetEmphasis()
+	{
+		gs.resetEmphasis();
+		board.repaint();
 	}
 
 	public Window()

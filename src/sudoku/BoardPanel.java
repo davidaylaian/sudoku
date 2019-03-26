@@ -9,11 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.color.*;
 
-public class BoardPanel extends JPanel 
+public class BoardPanel extends JPanel
 {
 	final Color dark = new Color(85,85,85);
 	final Color darker = new Color(0,0,0);
-	
+
 	BoardPanel()
 	{
 		Window.setGameState(new GameState(null));
@@ -22,11 +22,11 @@ public class BoardPanel extends JPanel
 
 	private void setup()
 	{
-		
+
 		setPreferredSize(new Dimension(638, 648));
 		this.setBackground(Color.white);
 
-		
+
 		this.addMouseListener(new MouseListener()
 		{
 			public void mouseClicked(MouseEvent e) {}
@@ -71,7 +71,7 @@ public class BoardPanel extends JPanel
 		for(int x=0; x<648; x+=72) {
 			if(x%216==0) {
 				g.setColor(darker);
-				g.fillRect(x-2, 0, 2, 648);				
+				g.fillRect(x-2, 0, 2, 648);
 			}else {
 				g.setColor(dark);
 				g.fillRect(x-1, 0, 1, 648);

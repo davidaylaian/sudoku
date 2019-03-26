@@ -15,7 +15,7 @@ public class GameState
 		Cell modifiedCell;
 		int indexX;
 		int indexY;
-		
+
 		Change(Cell mod, int x, int y)
 		{
 			modifiedCell = mod;
@@ -70,7 +70,7 @@ public class GameState
 		Change c = new Change(
 			gameBoard[row][col], row, col
 		);
-		
+
 		history_undo.push(c);
 		history_redo.clear();
 		gameBoard[row][col] = newCell;
@@ -98,7 +98,7 @@ public class GameState
 			gameBoard[c.indexX][c.indexY],
 			c.indexX, c.indexY
 		);
-		
+
 		history_redo.push(redo);
 		gameBoard[c.indexX][c.indexY] = c.modifiedCell;
 	}
@@ -110,7 +110,7 @@ public class GameState
 			gameBoard[c.indexX][c.indexY],
 			c.indexX, c.indexY
 		);
-		
+
 		history_undo.push(undo);
 		gameBoard[c.indexX][c.indexY] = c.modifiedCell;
 	}

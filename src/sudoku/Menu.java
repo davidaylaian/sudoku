@@ -134,7 +134,7 @@ public class Menu extends JPanel implements ActionListener
 	public void updateGenerate() {
 		hint.setEnabled(!Window.mode);
 	}
-  
+
 	public void actionPerformed(ActionEvent e)
 	{
 		String eventName = e.getActionCommand();
@@ -200,8 +200,7 @@ public class Menu extends JPanel implements ActionListener
 					updateGenerate();
 					updateSolve();
 					b.setSelected(false);
-					Cell[][] a = new Cell[9][9];
-					Window.getGameState().resetEmphasis();
+					Window.resetEmphasis();
 				}else {
 					a.setSelected(false);
 					b.setSelected(true);
