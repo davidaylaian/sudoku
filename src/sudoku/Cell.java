@@ -63,6 +63,26 @@ public class Cell {
 		return state;
 	}
 
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public boolean[][] getEmphasis() {
+		return emphasis;
+	}
+
+	public void setEmphasis(boolean[][] emphasis) {
+		this.emphasis = emphasis;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public void click(int r, int c, boolean solvingMode) {
 		if(solvingMode) {
 			if(state!=0) {

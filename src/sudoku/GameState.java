@@ -49,11 +49,6 @@ public class GameState
 		}
 	}
 
-	public Cell[][] getBoard()
-	{
-		return gameBoard;
-	}
-
 	public void resetEmphasis()
 	{
 		for (int x = 0; x < 9; x++)
@@ -80,15 +75,21 @@ public class GameState
 	{
 		return gameBoard[indexX][indexY];
 	}
+	
+	public int[][] getSolution() {
+		return solution;
+	}
 
-	public Cell[][] getGameBoard()
-	{
+	public void setSolution(int[][] solution) {
+		this.solution = solution;
+	}
+
+	public Cell[][] getGameBoard() {
 		return gameBoard;
 	}
 
-	public int[][] getSolution()
-	{
-		return solution;
+	public void setGameBoard(Cell[][] gameBoard) {
+		this.gameBoard = gameBoard;
 	}
 
 	public void undo()
@@ -125,6 +126,11 @@ public class GameState
 		return !history_redo.isEmpty();
 	}
 
+	public void setHistoryArrays() {
+		history_undo = new Stack<>();
+		history_redo = new Stack<>();
+	}
+	
 	public void save(File f) throws Exception
 	{
 		FileOutputStream FOS = new FileOutputStream(f);
@@ -137,6 +143,9 @@ public class GameState
 
 	public static GameState load(File f) throws Exception
 	{
+		
+		
+		
 		FileInputStream FIS = new FileInputStream(f);
 		XMLDecoder D = new XMLDecoder(FIS);
 		GameState g = (GameState) D.readObject();
