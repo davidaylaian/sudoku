@@ -66,11 +66,11 @@ public class BoardPanel extends JPanel
 		}
 		drawGrid(g);
 	}
+
 	public void repaint() {
 		super.repaint();
-		System.out.println("repainted");
-
 	}
+
 	private void drawGrid(Graphics g) {
 		for(int x=0; x<648; x+=72) {
 			if(x%216==0) {
