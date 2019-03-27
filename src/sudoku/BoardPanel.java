@@ -43,7 +43,7 @@ public class BoardPanel extends JPanel
 
 				GameState state = Window.getGameState();
 				Cell copy = state.getCell(rowOfCell, colOfCell).makeCopy();
-				copy.click(rowInside-(rowOfCell*3), colInside-(colOfCell*3), true);
+				copy.click(rowInside-(rowOfCell*3), colInside-(colOfCell*3), Window.mode);
 				state.setCell(copy, rowOfCell, colOfCell);
 
 				Window.passUpdateUndoRedo();
@@ -66,7 +66,11 @@ public class BoardPanel extends JPanel
 		}
 		drawGrid(g);
 	}
+	public void repaint() {
+		super.repaint();
+		System.out.println("repainted");
 
+	}
 	private void drawGrid(Graphics g) {
 		for(int x=0; x<648; x+=72) {
 			if(x%216==0) {

@@ -16,18 +16,6 @@ public class Window
 	// true = solving, entry = false
 	static boolean mode;
 
-	public static boolean getMode() {
-		return mode;
-	}
-
-	public static void entryMode() {
-		mode = false;
-	}
-
-	public static void solvingMode() {
-		mode = true;
-	}
-
 	public static GameState getGameState() {
 		return gs;
 	}
@@ -42,11 +30,6 @@ public class Window
 	}
 
 	public static void repaintBoard()
-	{
-		board.repaint();
-	}
-
-	public static void resetEmphasis()
 	{
 		gs.resetEmphasis();
 		board.repaint();
@@ -70,7 +53,6 @@ public class Window
 		frame.setResizable(false);
 
 		frame.setLocationRelativeTo(null);
-		entryMode();
 		menu.updateUndoRedo();
 		menu.updateHint();
 		menu.updateGenerate();
