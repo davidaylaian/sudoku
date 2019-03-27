@@ -31,6 +31,11 @@ public class Window
 
 	public static void repaintBoard()
 	{
+		board.repaint();
+	}
+
+	public static void resetEmphasis()
+	{
 		gs.resetEmphasis();
 		board.repaint();
 	}

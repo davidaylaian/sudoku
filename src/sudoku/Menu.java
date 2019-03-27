@@ -214,16 +214,7 @@ public class Menu extends JPanel implements ActionListener
 
 		if(eventName.equals("solving")) {
 			//toggles the entry button (a) if it is selected already
-//			int[][] temp;
-//			temp = Puzzle.solvePuzzle(Window.getGameState().getBoard());
-//			System.out.println("monka");
-//			if(temp == null) {
-//				new PopUp("Entered puzzle was not valid.","Ok", "");
-//				a.setSelected(true);
-//				b.setSelected(false);
-//			}
 			Window.mode = true;
-			System.out.println("uwu");
 			updateHint();
 			updateGenerate();
 			updateSolve();
