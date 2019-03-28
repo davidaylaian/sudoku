@@ -237,6 +237,7 @@ public class Menu extends JPanel implements ActionListener
 		if(eventName.equals("solving")) {
 			//toggles the entry button (a) if it is selected already
 			Window.mode = true;
+			Window.getGameState().setHistoryArrays();
 			updateHint();
 			updateGenerate();
 			updateSolve();
