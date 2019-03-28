@@ -1,5 +1,6 @@
 package sudoku;
 
+import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -12,6 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.SwingUtilities;
 
 public class Menu extends JPanel implements ActionListener
 {
@@ -149,10 +151,30 @@ public class Menu extends JPanel implements ActionListener
 		}
 
 		if(eventName.equals("gen")) {
-			PopUp pop = new PopUp( "Generate a new puzzle (This puzzle will be lost)");
-			GameState gs = Window.getGameState();
-			gs = new GameState(Puzzle.createPuzzle());
-			pop.doneLoading();
+			
+			// Open the popup and tell it to repaint on this thread
+			PopUp pop = new PopUp("Generate a new puzzle (This puzzle will be lost)");
+			pop.repaint();
+			
+			Runnable generatePuzzle = new Runnable() {
+				public void run() {
+					
+					/*
+					 * This is where the puzzle is supposed to be loaded
+					 * into the GameState. Needs a bit more glue to work
+					 */
+					GameState gs = Window.getGameState();
+					int[][] solution = Puzzle.createPuzzle();
+					gs = new GameState(solution);
+					pop.doneLoading();
+				}
+			};
+			
+			/*
+			 * Wait until the popup is done painting before using the thread;
+			 * otherwise the popup won't paint until the puzzle is ready
+			 */
+			EventQueue.invokeLater(generatePuzzle);
 		}
 
 		if(eventName.equals("save")) {
