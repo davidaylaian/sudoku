@@ -11,7 +11,7 @@ public class Window
 	private static JPanel contentPane;
 	private static GameState gs;
 	private static Menu menu;
-	private static BoardPanel board;
+	static BoardPanel board;
 
 	/*
 	 * true  = solving

@@ -142,13 +142,35 @@ public class Menu extends JPanel implements ActionListener
 		String eventName = e.getActionCommand();
 
 		if(eventName.equals("hint")) {
-			new PopUp( "Are you sure you want a hint?", "Yes", "No", false);
+			p = new PopUp( "Are you sure you want a hint?", "Yes", "No", false);
+			if(p.getYesOrNo()) {
+				Window.getGameState().hint();
+				Window.board.repaint();
+				
+			}
 		}
 
 		if(eventName.equals("solve")) {
 
 			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No", false);
 		}
+
+		// Does not Work Todo
+		if(eventName.equals("gen")) {
+			p = new PopUp( "Generate a new puzzle (This puzzle will be lost)");
+		//	p.repaint();
+			int hints = p.getHints();
+			
+			if(hints!=-1) {
+				Window.board.setBoard(Puzzle.createPuzzle());
+				p.doneLoading();
+				for(int i=1;i<=hints;i++) {
+					Window.getGameState().hint();
+				}
+			}
+			Window.board.repaint();
+
+
 
 		if(eventName.equals("gen")) {
 			
@@ -220,6 +242,7 @@ public class Menu extends JPanel implements ActionListener
 				b.setSelected(false);
 				p = new PopUp("Switching to Entry Mode will erase the current puzzle", "Ok", "Cancel", true);
 				if(p.getYesOrNo()) {
+					
 					Window.mode = false;
 					updateHint();
 					updateGenerate();
@@ -237,7 +260,11 @@ public class Menu extends JPanel implements ActionListener
 		if(eventName.equals("solving")) {
 			//toggles the entry button (a) if it is selected already
 			Window.mode = true;
+			int[][] temp = Puzzle.copyArray(Window.getGameState().placements);
+			Window.getGameState().solution = Puzzle.solvePuzzle(temp);
+			
 			Window.getGameState().setHistoryArrays();
+
 			updateHint();
 			updateGenerate();
 			updateSolve();
