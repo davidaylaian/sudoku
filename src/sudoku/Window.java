@@ -13,8 +13,11 @@ public class Window
 	private static Menu menu;
 	private static BoardPanel board;
 
-	// true = solving, entry = false
-	static boolean mode;
+	/*
+	 * true  = solving
+	 * false = entry
+	 */
+	public static boolean mode;
 
 	public static GameState getGameState() {
 		return gs;

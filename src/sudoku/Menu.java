@@ -1,5 +1,6 @@
 package sudoku;
 
+import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -12,6 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.SwingUtilities;
 
 public class Menu extends JPanel implements ActionListener
 {
@@ -132,7 +134,7 @@ public class Menu extends JPanel implements ActionListener
 	}
 
 	public void updateGenerate() {
-		hint.setEnabled(!Window.mode);
+		gen.setEnabled(!Window.mode);
 	}
 
 	public void actionPerformed(ActionEvent e)
@@ -147,11 +149,32 @@ public class Menu extends JPanel implements ActionListener
 
 			new PopUp( "Are you sure you want to solve the puzzle?", "Yes", "No", false);
 		}
-		// Does not Work Todo
-		if(eventName.equals("gen")) {
-			new PopUp( "Generate a new puzzle (This puzzle will be lost)");
-			Puzzle.createPuzzle();
 
+		if(eventName.equals("gen")) {
+			
+			// Open the popup and tell it to repaint on this thread
+			PopUp pop = new PopUp("Generate a new puzzle (This puzzle will be lost)");
+			pop.repaint();
+			
+			Runnable generatePuzzle = new Runnable() {
+				public void run() {
+					
+					/*
+					 * This is where the puzzle is supposed to be loaded
+					 * into the GameState. Needs a bit more glue to work
+					 */
+					GameState gs = Window.getGameState();
+					int[][] solution = Puzzle.createPuzzle();
+					gs = new GameState(solution);
+					pop.doneLoading();
+				}
+			};
+			
+			/*
+			 * Wait until the popup is done painting before using the thread;
+			 * otherwise the popup won't paint until the puzzle is ready
+			 */
+			EventQueue.invokeLater(generatePuzzle);
 		}
 
 		if(eventName.equals("save")) {
@@ -167,7 +190,6 @@ public class Menu extends JPanel implements ActionListener
 		}
 
 		if(eventName.equals("redo")) {
-
 			Window.getGameState().redo();
 			Window.repaintBoard();
 		}
@@ -196,7 +218,7 @@ public class Menu extends JPanel implements ActionListener
 			//toggles the solving button (b) if it is selected already
 			if(Window.mode) {
 				b.setSelected(false);
-				p = new PopUp( "Switching to Entry Mode will erase the current puzzle", "Ok", "Cancel", true);
+				p = new PopUp("Switching to Entry Mode will erase the current puzzle", "Ok", "Cancel", true);
 				if(p.getYesOrNo()) {
 					Window.mode = false;
 					updateHint();
