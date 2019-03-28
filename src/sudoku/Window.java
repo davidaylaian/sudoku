@@ -13,20 +13,11 @@ public class Window
 	private static Menu menu;
 	static BoardPanel board;
 
-	// true = solving, entry = false
-	static boolean mode;
-
-	public static boolean getMode() {
-		return mode;
-	}
-
-	public static void entryMode() {
-		mode = false;
-	}
-
-	public static void solvingMode() {
-		mode = true;
-	}
+	/*
+	 * true  = solving
+	 * false = entry
+	 */
+	public static boolean mode;
 
 	public static GameState getGameState() {
 		return gs;
@@ -70,7 +61,6 @@ public class Window
 		frame.setResizable(false);
 
 		frame.setLocationRelativeTo(null);
-		entryMode();
 		menu.updateUndoRedo();
 		menu.updateHint();
 		menu.updateGenerate();

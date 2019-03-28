@@ -27,6 +27,7 @@ public class PopUp implements ActionListener{
 	
 	JLabel valueDisplay;
 	JLabel epic, loadingLabel;
+	JLabel empty, hintsLabel;
 	
 	private int answer = 0;
 	boolean yesnt;
@@ -94,10 +95,16 @@ public class PopUp implements ActionListener{
 		contentPane = new JPanel();
 		contentPane.setBorder(BorderFactory.createEmptyBorder(10, 100, 10, 100));
 		contentPane.setBackground(Color.white);
-		contentPane.setLayout(new GridLayout(3, 2, 10, 5));
+		contentPane.setLayout(new GridLayout(4, 2, 10, 5));
 		
 		epic = new JLabel(queryStore);
 		contentPane.add(epic);
+		
+		empty = new JLabel("");
+		contentPane.add(empty);
+		
+		hintsLabel = new JLabel("Number of Hints Wanted for Puzzle: ");
+		contentPane.add(hintsLabel);
 		
 		valueDisplay = new JLabel("0");
 		contentPane.add(valueDisplay);
@@ -182,4 +189,7 @@ public class PopUp implements ActionListener{
 		}
 	}
 	
+	public void repaint() {
+		frame.repaint();
+	}
 }

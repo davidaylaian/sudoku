@@ -135,6 +135,10 @@ public class BoardPanel extends JPanel
 		drawGrid(g);
 	}
 
+	public void repaint() {
+		super.repaint();
+	}
+
 	private void drawGrid(Graphics g) {
 		for(int x=0; x<648; x+=72) {
 			if(x%216==0) {
