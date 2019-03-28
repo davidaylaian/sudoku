@@ -182,4 +182,7 @@ public class PopUp implements ActionListener{
 		}
 	}
 	
+	public void repaint() {
+		frame.repaint();
+	}
 }
