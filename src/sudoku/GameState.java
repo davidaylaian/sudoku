@@ -7,9 +7,12 @@ import java.beans.XMLEncoder;
 
 public class GameState
 {
-	private int[][] solution;
-	private Cell[][] gameBoard;
+	public int[][] solution;
+	public Cell[][] gameBoard;
+	public int[][] placements = new int[9][9];
+	public boolean[][] place = new boolean[9][9];  
 
+	
 	private class Change
 	{
 		Cell modifiedCell;
@@ -48,7 +51,23 @@ public class GameState
 			}
 		}
 	}
-
+	public void hint() {
+		boolean blank = false;
+		int r;
+		int c;
+		System.out.println("1");
+		do {
+			r = (int)(Math.random()*9);
+			c = (int)(Math.random()*9);
+			System.out.println(placements[r][c]);
+			if(placements[r][c] == 0) {
+				blank = true;
+			}
+		}
+		while(!blank);
+		System.out.println("2");
+		gameBoard[r][c].setState(solution[r][c]);
+	}
 	public Cell[][] getBoard()
 	{
 		return gameBoard;

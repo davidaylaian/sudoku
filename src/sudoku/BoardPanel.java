@@ -11,9 +11,10 @@ import java.awt.color.*;
 
 public class BoardPanel extends JPanel
 {
+	
 	final Color dark = new Color(85,85,85);
-	final Color darker = new Color(0,0,0);
-
+	final Color darker = new Color(0,0,0);	
+	
 	BoardPanel()
 	{
 		Window.setGameState(new GameState(null));
@@ -35,6 +36,7 @@ public class BoardPanel extends JPanel
 
 			public void mousePressed(MouseEvent e)
 			{
+				
 				int colOfCell = e.getX()/Cell.cellSide;
 				int rowOfCell = e.getY()/Cell.cellSide;
 
@@ -43,15 +45,81 @@ public class BoardPanel extends JPanel
 
 				GameState state = Window.getGameState();
 				Cell copy = state.getCell(rowOfCell, colOfCell).makeCopy();
-				copy.click(rowInside-(rowOfCell*3), colInside-(colOfCell*3), true);
+				copy.click(rowInside-(rowOfCell*3), colInside-(colOfCell*3), Window.mode);
 				state.setCell(copy, rowOfCell, colOfCell);
+			
+				//when player fixes it doesnt update properly
+				
+				int before = copy.getState();
+				state.placements[rowOfCell][colOfCell] = 0;
+				state.place[rowOfCell][colOfCell] = Puzzle.safePlace(state.placements, rowOfCell, colOfCell, copy.getState());
+				state.placements[rowOfCell][colOfCell] = copy.getState();
 
+				if(!state.place[rowOfCell][colOfCell]) {
+					for(int c=0;c<9;c++) {
+						if(state.placements[rowOfCell][c] == copy.getState()) {
+							state.place[rowOfCell][c] = false;
+						}
+					}
+					for(int r=0;r<9;r++) {
+						if(state.placements[r][colOfCell] == copy.getState()) {
+							state.place[r][colOfCell] = false;
+						}
+					}
+					int rStart = rowOfCell/3*3;
+					int cStart = colOfCell/3*3;
+					for(int r=rStart;r<rStart+3;r++) {
+						for(int c=cStart;c<cStart+3;c++) {
+							if(state.placements[r][c] == copy.getState()) {
+								state.place[r][c] = false;
+							}
+						}
+					}
+				} else {
+					for(int c=0;c<9;c++) {
+						if(state.placements[rowOfCell][c] == copy.getState()) {
+							state.place[rowOfCell][c] = false;
+						}
+					}
+					for(int r=0;r<9;r++) {
+						if(state.placements[r][colOfCell] == copy.getState()) {
+							state.place[r][colOfCell] = false;
+						}
+					}
+					int rStart = rowOfCell/3*3;
+					int cStart = colOfCell/3*3;
+					for(int r=rStart;r<rStart+3;r++) {
+						for(int c=cStart;c<cStart+3;c++) {
+							if(state.placements[r][c] == copy.getState()) {
+								state.place[r][c] = false;
+							}
+						}
+					}
+				}
+							
 				Window.passUpdateUndoRedo();
 				repaint();
 			}
 
 			public void mouseReleased(MouseEvent e) {}
 		});
+	}
+	public void setBoard(int[][] puzzle) {
+		GameState s = Window.getGameState();
+		s.place = new boolean[9][9];
+		s.placements = new int[9][9];
+		
+		s.resetEmphasis();
+		for(int r=0;r<9;r++) {
+			for(int c=0;c<9;c++) {
+				s.gameBoard[r][c].setState(puzzle[r][c]);
+			}
+		}
+		
+		int[][] temp = Puzzle.copyArray(puzzle);
+		s.placements = Puzzle.copyArray(puzzle);
+		
+		Window.getGameState().solution = Puzzle.solvePuzzle(temp);
 	}
 
 	public void paintComponent(Graphics g)
@@ -61,7 +129,7 @@ public class BoardPanel extends JPanel
 
 		for(int r=0; r<9; r++) {
 			for(int c=0; c<9; c++) {
-				state.getCell(r, c).draw(g, r, c);
+				state.getCell(r, c).draw(g, state.place[r][c], r, c);
 			}
 		}
 		drawGrid(g);

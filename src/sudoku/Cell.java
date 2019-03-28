@@ -50,6 +50,7 @@ public class Cell {
 	}
 
 	private void setState() {
+		
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
 				if(emphasis[i][j]) {
@@ -58,11 +59,13 @@ public class Cell {
 			}
 		}
 	}
-
+	
 	public int getState() {
 		return state;
 	}
-
+	public void setState(int s) {
+		state = s;
+	}
 	public void click(int r, int c, boolean solvingMode) {
 		if(solvingMode) {
 			if(state!=0) {
@@ -94,7 +97,7 @@ public class Cell {
 		}
 	}
 
-	public void draw(Graphics g, int row, int col) {
+	public void draw(Graphics g, boolean red, int row, int col) {
 		Font f = new Font("Roboto", Font.PLAIN, 30);
 		g.setFont(f);
 		int width = g.getFontMetrics().stringWidth(""+state);
@@ -118,6 +121,13 @@ public class Cell {
 				}
 			}
 		} else {
+			if(!red) {
+				g.setColor(Color.red);
+			}
+			else {
+				g.setColor(Color.white);
+			}
+			g.fillRect(col*cellSide, row*cellSide, cellSide, cellSide);
 			g.setColor(Color.black);
 			g.drawString(""+state, col*cellSide+width/2+16, row*cellSide+height/2+30);
 		}
